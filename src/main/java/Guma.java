@@ -133,6 +133,23 @@ public class Guma {
     }
 
     /**
+     * Delete a task in the tasklist
+     *
+     * @param idx The idx of the Task that should be deleted in the tasklist
+     * @return A string representation to inform user that the task has been removed
+     */
+    private String deleteTask(int idx) {
+        String taskToRemove = this.tasklist.get(idx - 1).toString();
+        this.tasklist.remove(idx - 1);
+        return String.format("%s\n\tNoted, I've removed this task:\n\t %s" +
+                        "\n\t Now you have %s tasks in the list\n%s",
+                SEPARATOR,
+                taskToRemove,
+                this.tasklist.size(),
+                SEPARATOR);
+    }
+
+    /**
      * Run the chatbot session
      * Print the Greeting message, reads and echos back to the user, until user press "bye"
      * Print the farewell message
@@ -160,6 +177,9 @@ public class Guma {
                 case "deadline":
                 case "event":
                     System.out.println(addTask(inp));
+                    break;
+                case "delete":
+                    System.out.println(deleteTask(Integer.parseInt(inp.split(" ")[1])));
                     break;
                 default:
                     System.out.println(SEPARATOR + "\n\t Sorry, I do not recognize the command :-(\n"+SEPARATOR);
