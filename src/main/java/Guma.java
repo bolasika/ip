@@ -58,9 +58,33 @@ public class Guma {
      * @param taskName The name of the task to be appended into tasklist
      * @return A string representation to show that the task has been added
      */
-    private String addTask(String taskName) {
-        this.tasklist.add(new Task(taskName));
-        return String.format("%s\nadded %s\n%s", SEPARATOR, taskName, SEPARATOR);
+    private String addTask(String inp) {
+        String[] taskInp = inp.split(" ");
+        String taskName = "";
+        switch (taskInp[0]) {
+            case "todo":
+                taskName = inp.split("todo ")[1];
+                this.tasklist.add(new ToDoTask(taskName));
+                break;
+            case "deadline":
+                taskName = inp.split("deadline ")[1].split(" /by")[0];
+                String description = inp.split("/by ")[1];
+                this.tasklist.add(new DeadlineTask(taskName, description));
+                break;
+            case "event":
+                taskName = inp.split("event ")[1].split(" /from")[0];
+                String fromTime = inp.split(" /from ")[1].split(" /to ")[0];
+                String toTime = inp.split("/to ")[1];
+                this.tasklist.add(new EventTask(taskName, fromTime, toTime));
+
+        }
+
+        return String.format("%s\n" +
+                "\tGot it. I've added this task:\n" +
+                "\t %s\n" +
+                "\tNow you have %s tasks in the list\n" +
+                "%s", SEPARATOR, this.tasklist.get(this.tasklist.size()-1),
+                this.tasklist.size(), SEPARATOR);
     }
 
     /**
