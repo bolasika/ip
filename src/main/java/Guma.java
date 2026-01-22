@@ -9,9 +9,6 @@ public class Guma {
     /** Scanner function to read the user input */
     private final Scanner sc = new Scanner(System.in);
 
-    /** Storing the user input */
-    private String inp;
-
     /**
      * The Constructor to initialize Guma chatbot instance with empty tasklist
      */
@@ -63,7 +60,7 @@ public class Guma {
      */
     private String addTask(String taskName) {
         this.tasklist.add(new Task(taskName));
-        return String.format("added: %s\n%s\n%s", SEPARATOR, taskName, SEPARATOR);
+        return String.format("%s\nadded %s\n%s", SEPARATOR, taskName, SEPARATOR);
     }
 
     /**
@@ -72,12 +69,36 @@ public class Guma {
      * @return A string representation of the tasks
      */
     private String list() {
-        String tmp = SEPARATOR + "\n";
+        String tmp = SEPARATOR + "\n" + "\tHere are the tasks in your list:\n";
         for (int i = 0; i < tasklist.size(); i++) {
             tmp += String.format("\t%s. %s\n", i + 1, tasklist.get(i));
         }
         tmp += SEPARATOR;
         return tmp;
+    }
+
+    /**
+     * Mark a task as complete
+     *
+     * @param idx The index that the Task is located in Tasklist
+     * @return A string representation to inform that the task has been completed
+     */
+    private String completeTask(int idx) {
+        this.tasklist.get(idx - 1).complete();
+        return String.format("%s\n\tNice! I've marked this task as done:\n\t%s\n%s",SEPARATOR,
+                this.tasklist.get(idx - 1).toString(), SEPARATOR);
+    }
+
+    /**
+     * Mark a task as incomplete
+     *
+     * @param idx The index that the Task is located in Tasklist
+     * @return A string representation to inform that the task has been undo
+     */
+    private String undoTask(int idx) {
+        this.tasklist.get(idx - 1).undo();
+        return String.format("%s\n\tOk, I've marked this task as not done yet:\n\t%s\n%s",SEPARATOR,
+                this.tasklist.get(idx - 1).toString(), SEPARATOR);
     }
 
     /**
@@ -88,12 +109,18 @@ public class Guma {
     public void run() {
         System.out.println(this.Start());
         while (true){
-            inp = sc.nextLine();
-            if (inp.toLowerCase().equals("bye")) {
+            String inp = sc.nextLine();
+            String action = inp.split(" ")[0].toLowerCase();
+            if (action.equals("bye")) {
                 break;
-            } else if (inp.toLowerCase().equals("list")) {
+            } else if (action.equals("list")) {
                 System.out.println(list());
-            } else {
+            } else if (action.equals("mark")) {
+                System.out.println(completeTask(Integer.parseInt(inp.split(" ")[1])));
+            } else if (action.equals("unmark")) {
+                System.out.println(undoTask(Integer.parseInt(inp.split(" ")[1])));
+            }
+            else {
                 System.out.println(addTask(inp));
             }
 

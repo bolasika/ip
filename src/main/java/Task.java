@@ -2,6 +2,9 @@ public class Task {
     /** Name of the Task */
     private String taskName;
 
+    /** Boolean status of the task */
+    private boolean status;
+
     /**
      * Constructor for the task
      *
@@ -9,6 +12,21 @@ public class Task {
      */
     public Task(String taskName) {
         this.taskName = taskName;
+        this.status = false;
+    }
+
+    /**
+     * Mark the task as complete
+     */
+    public void complete() {
+        this.status = true;
+    }
+
+    /**
+     * Mark the task as incomplete
+     */
+    public void undo() {
+        this.status = false;
     }
 
     /**
@@ -18,6 +36,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return taskName;
+        return String.format("[%s] %s", this.status ? "X" : " ", taskName);
     }
 }
