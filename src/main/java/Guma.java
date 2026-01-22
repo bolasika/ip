@@ -23,8 +23,8 @@ public class Guma {
      */
     private String Start() {
         return SEPARATOR + "\n" +
-                "\tHello! I'm Guma\n" +
-                "\tWhat can I do for you?\n" +
+                "\t Hello! I'm Guma\n" +
+                "\t What can I do for you?\n" +
                 SEPARATOR;
     }
 
@@ -35,27 +35,15 @@ public class Guma {
      */
     private String End() {
         return SEPARATOR + "\n" +
-                "\tBye. Hope to see you again soon!\n" +
+                "\t Bye. Hope to see you again soon!\n" +
                 SEPARATOR;
-    }
-
-    /**
-     * Output the commands entered by the user
-     *
-     * @param userInp The input that user entered from run() function
-     * @return A string representation for user's task list
-     */
-    private String Echo(String userInp) {
-        return String.format("%s\n" +
-                "\t%s\n" +
-                "%s", SEPARATOR, userInp, SEPARATOR);
     }
 
 
     /**
      * Append tasks into tasklist then
      *
-     * @param taskName The name of the task to be appended into tasklist
+     * @param inp The unformatted user input
      * @return A string representation to show that the task has been added
      */
     private String addTask(String inp) {
@@ -63,19 +51,38 @@ public class Guma {
         String taskName = "";
         switch (taskInp[0]) {
             case "todo":
-                taskName = inp.split("todo ")[1];
-                this.tasklist.add(new ToDoTask(taskName));
+                try {
+                    taskName = inp.split("todo ")[1];
+                    this.tasklist.add(new ToDoTask(taskName));
+                }
+                catch (Exception e) {
+                    return SEPARATOR + "\n" +
+                            "\tERROR! Syntax: todo <taskname>\n" +
+                            SEPARATOR;
+                }
                 break;
             case "deadline":
-                taskName = inp.split("deadline ")[1].split(" /by")[0];
-                String description = inp.split("/by ")[1];
-                this.tasklist.add(new DeadlineTask(taskName, description));
+                try {
+                    taskName = inp.split("deadline ")[1].split(" /by")[0];
+                    String description = inp.split("/by ")[1];
+                    this.tasklist.add(new DeadlineTask(taskName, description));
+                } catch (Exception e) {
+                    return SEPARATOR + "\n" +
+                            "\tERROR! Ensure your Syntax: deadline <taskname> /by <description>\n" +
+                            SEPARATOR;
+                }
                 break;
             case "event":
-                taskName = inp.split("event ")[1].split(" /from")[0];
-                String fromTime = inp.split(" /from ")[1].split(" /to ")[0];
-                String toTime = inp.split("/to ")[1];
-                this.tasklist.add(new EventTask(taskName, fromTime, toTime));
+                try {
+                    taskName = inp.split("event ")[1].split(" /from")[0];
+                    String fromTime = inp.split(" /from ")[1].split(" /to ")[0];
+                    String toTime = inp.split("/to ")[1];
+                    this.tasklist.add(new EventTask(taskName, fromTime, toTime));
+                } catch (Exception e) {
+                    return SEPARATOR + "\n" +
+                            "\tERROR! Ensure your Syntax: event <taskname> /from <Start time> /to <End time>\n" +
+                            SEPARATOR;
+                }
 
         }
 
@@ -149,8 +156,13 @@ public class Guma {
                 case "unmark":
                     System.out.println(undoTask(Integer.parseInt(inp.split(" ")[1])));
                     break;
-                default:
+                case "todo":
+                case "deadline":
+                case "event":
                     System.out.println(addTask(inp));
+                    break;
+                default:
+                    System.out.println(SEPARATOR + "\n\t Sorry, I do not recognize the command :-(\n"+SEPARATOR);
                     break;
             }
         } while (!action.equals("bye"));
