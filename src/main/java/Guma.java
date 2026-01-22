@@ -1,7 +1,11 @@
-import java.util.Scanner;
+import java.util.*;
 public class Guma {
+    /** Array to store the Task */
+    private ArrayList<Task> tasklist;
+
     /** Separator line for formatting chatbot */
     private static final String SEPARATOR = "\t____________________________________________________________";
+
     /** Scanner function to read the user input */
     private final Scanner sc = new Scanner(System.in);
 
@@ -9,9 +13,11 @@ public class Guma {
     private String inp;
 
     /**
-     * The Constructor for Guma chatbot
+     * The Constructor to initialize Guma chatbot instance with empty tasklist
      */
-    public Guma() {}
+    public Guma() {
+        this.tasklist = new ArrayList<Task>();
+    }
 
     /**
      * A greeting message displayed when the chatbot starts
@@ -50,6 +56,31 @@ public class Guma {
 
 
     /**
+     * Append tasks into tasklist then
+     *
+     * @param taskName The name of the task to be appended into tasklist
+     * @return A string representation to show that the task has been added
+     */
+    private String addTask(String taskName) {
+        this.tasklist.add(new Task(taskName));
+        return String.format("added: %s\n%s\n%s", SEPARATOR, taskName, SEPARATOR);
+    }
+
+    /**
+     * Output a formatted list of task stored in Tasklist
+     *
+     * @return A string representation of the tasks
+     */
+    private String list() {
+        String tmp = SEPARATOR + "\n";
+        for (int i = 0; i < tasklist.size(); i++) {
+            tmp += String.format("\t%s. %s\n", i + 1, tasklist.get(i));
+        }
+        tmp += SEPARATOR;
+        return tmp;
+    }
+
+    /**
      * Run the chatbot session
      * Print the Greeting message, reads and echos back to the user, until user press "bye"
      * Print the farewell message
@@ -60,8 +91,12 @@ public class Guma {
             inp = sc.nextLine();
             if (inp.toLowerCase().equals("bye")) {
                 break;
+            } else if (inp.toLowerCase().equals("list")) {
+                System.out.println(list());
+            } else {
+                System.out.println(addTask(inp));
             }
-            System.out.println(this.Echo(inp));
+
         }
         System.out.println(this.End());
     }
