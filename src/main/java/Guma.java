@@ -108,24 +108,29 @@ public class Guma {
      */
     public void run() {
         System.out.println(this.Start());
-        while (true){
+        String action = "";
+        do {
             String inp = sc.nextLine();
-            String action = inp.split(" ")[0].toLowerCase();
-            if (action.equals("bye")) {
-                break;
-            } else if (action.equals("list")) {
-                System.out.println(list());
-            } else if (action.equals("mark")) {
-                System.out.println(completeTask(Integer.parseInt(inp.split(" ")[1])));
-            } else if (action.equals("unmark")) {
-                System.out.println(undoTask(Integer.parseInt(inp.split(" ")[1])));
+            action = inp.split(" ")[0].toLowerCase();
+            switch (action) {
+                case "bye":
+                    System.out.println(this.End());
+                    break;
+                case "list":
+                    System.out.println(list());
+                    break;
+                case "mark":
+                    System.out.println(completeTask(Integer.parseInt(inp.split(" ")[1])));
+                    break;
+                case "unmark":
+                    System.out.println(undoTask(Integer.parseInt(inp.split(" ")[1])));
+                    break;
+                default:
+                    System.out.println(addTask(inp));
+                    break;
             }
-            else {
-                System.out.println(addTask(inp));
-            }
+        } while (!action.equals("bye"));
 
-        }
-        System.out.println(this.End());
     }
 
     /**
