@@ -8,7 +8,7 @@ public class DeadlineTask extends Task {
      * @param description The specific date / time that is due on
      */
     public DeadlineTask(String taskName, String description) {
-        super(taskName);
+        super(TaskType.DEADLINE, taskName);
         this.description = description;
     }
 
@@ -19,6 +19,6 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.description);
+        return String.format("%s (by: %s)", super.toString(), this.description);
     }
 }

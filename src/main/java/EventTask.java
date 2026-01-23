@@ -10,7 +10,7 @@ public class EventTask extends Task {
      * @param to The end date / time of the event
      */
     public EventTask(String taskName, String from, String to) {
-        super(taskName);
+        super(TaskType.EVENT, taskName);
         this.from = from;
         this.to = to;
     }
@@ -22,6 +22,6 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        return String.format("%s (from: %s to: %s)", super.toString(), this.from, this.to);
     }
 }

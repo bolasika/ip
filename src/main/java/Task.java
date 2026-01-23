@@ -5,12 +5,46 @@ public abstract class Task {
     /** Boolean status of the task */
     private boolean status;
 
+    /** Task type of the task */
+    private TaskType type;
+
+    /**
+     * Enum to represents the type of the task
+     * Tag to display in the String Representation of Task
+     */
+    enum TaskType {
+        TODO("T"),
+        DEADLINE("D"),
+        EVENT("E");
+
+        /** Tag to show the Task type */
+        private String tag;
+
+        /**
+         * Constructor for Task type
+         * @param tag Tag used for String representation of Task
+         */
+        TaskType(String tag) {
+            this.tag = tag;
+        }
+
+        /**
+         * Returns the String representation of the Tag
+         * @return String representation of the task type
+         */
+        public String tag() {
+            return tag;
+        }
+    }
+
+
     /**
      * Constructor for the task
      *
      * @param taskName Name of the task
      */
-    public Task(String taskName) {
+    public Task(TaskType type, String taskName) {
+        this.type = type;
         this.taskName = taskName;
         this.status = false;
     }
@@ -36,6 +70,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", this.status ? "X" : " ", taskName);
+        return String.format("[%s][%s] %s", type.tag(),
+                this.status ? "X" : " ", taskName);
     }
 }
