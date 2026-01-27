@@ -5,7 +5,7 @@ public class ToDoTask extends Task {
      * @param taskName Name of the task
      */
     public ToDoTask(String taskName) {
-        super(TaskType.TODO, taskName);
+        super(taskName);
     }
 
     /**
@@ -15,6 +15,6 @@ public class ToDoTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s", super.toString());
+        return String.format("[T]%s", super.toString());
     }
 }

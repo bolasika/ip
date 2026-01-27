@@ -1,7 +1,7 @@
 public class EventTask extends Task {
     /** String representation of the Start date / time */
-    private String from;
-    private String to;
+    private String startTime;
+    private String endTime;
 
     /**
      * Constructor of EventTask
@@ -10,9 +10,9 @@ public class EventTask extends Task {
      * @param to The end date / time of the event
      */
     public EventTask(String taskName, String from, String to) {
-        super(TaskType.EVENT, taskName);
-        this.from = from;
-        this.to = to;
+        super(taskName);
+        this.startTime = from;
+        this.endTime = to;
     }
 
     /**
@@ -22,6 +22,6 @@ public class EventTask extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (from: %s to: %s)", super.toString(), this.from, this.to);
+        return String.format("[E]%s (from: %s to: %s)", super.toString(), this.startTime, this.endTime);
     }
 }
