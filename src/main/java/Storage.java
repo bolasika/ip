@@ -1,0 +1,77 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileWriter;
+
+/**
+ * Handles loading and storing task data from text file on disk
+ * Each line in the text file represent a single task.
+ * Each task parameters are separated using underscore ("_") separators
+ */
+public class Storage {
+    /**
+     * Loads tasks from the given file path and return them as ArrayList
+     * @param filePath the relative or absolute path to the task data file
+     * @return An {@link ArrayList} of loaded {@link Task} objects, or null if the file is not found.
+     */
+    public static ArrayList<Task> loadTask(String filePath) {
+        try {
+            ArrayList<Task> tasks = new ArrayList<>();
+            File f = new File(filePath);
+
+            // If the file do not exist, create the file and return empty ArrayList
+            if (!f.exists()) {
+                File parent = f.getParentFile();
+                // If the path include parent, but parent do not exist:
+                if (parent != null && !parent.exists()) {
+                    parent.mkdirs();
+                }
+                f.createNewFile();
+                return tasks;
+            }
+
+            Scanner sc = new Scanner(f);
+            Task t;
+            while (sc.hasNext()) {
+                String a = sc.nextLine();
+                String[] b = a.split("_");
+                switch (b[0]){
+                    case "T":
+                        t = new ToDoTask(b[2]);
+                        if ("1".equals(b[1])) {
+                            t.complete();
+                        }
+                        tasks.add(t);
+                        break;
+                    case "D":
+                        t = new DeadlineTask(b[2], b[3]);
+                        if ("1".equals(b[1])) {
+                            t.complete();
+                        }
+                        tasks.add(t);
+                        break;
+                    case "E":
+                        t = new EventTask(b[2], b[3], b[4]);
+                        if ("1".equals(b[1])) {
+                            t.complete();
+                        }
+                        tasks.add(t);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            sc.close();
+            return tasks;
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable in reading file");
+            return null;
+        } catch (IOException e) {
+            System.out.println("Unable to read/create data file");
+            return null;
+        }
+    }
+
+}
