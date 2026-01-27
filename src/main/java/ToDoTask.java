@@ -17,4 +17,13 @@ public class ToDoTask extends Task {
     public String toString() {
         return String.format("[T]%s", super.toString());
     }
+
+    /**
+     * Convert ToDo task into a single-line format for saving to disk
+     * @return A single-line string encoding Todo task
+     */
+    @Override
+    public String toFileString() {
+        return "T_" + (getStatus() ? "1" : "0") + "_" + getTaskName();
+    }
 }

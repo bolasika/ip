@@ -24,4 +24,14 @@ public class EventTask extends Task {
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(), this.startTime, this.endTime);
     }
+
+    /**
+     * Convert Event task into a single-line format for saving to disk
+     * @return A single-line string encoding this Event task
+     */
+    @Override
+    public String toFileString() {
+        return String.format("E_%s_%s_%s_%s", getStatus() ? "1" : "0",
+                getTaskName(), this.startTime, this.endTime);
+    }
 }
