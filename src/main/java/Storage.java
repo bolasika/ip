@@ -74,4 +74,28 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the given list of tasks to the data file at the specified file path.
+     * Each line in the text file represent a single task.
+     * Each task parameters are separated using underscore ("_") separators
+     * @param tasks The {@link ArrayList} of task to be saved
+     * @param filePath The relative or absolute path to the data file to write to.
+     * @return {@code true} if the tasks were successfully written to disk, otherwise {@code false}.
+     */
+    public static boolean saveTask(ArrayList<Task> tasks, String filePath) {
+        try {
+            StringBuilder sb = new StringBuilder();
+            FileWriter fw = new FileWriter(filePath);
+            for (Task t : tasks) {
+                sb.append(String.format("%s\n", t.toFileString()));
+            }
+            fw.write(sb.toString());
+            fw.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Unable to read/create data file");
+            return false;
+        }
+    }
+
 }

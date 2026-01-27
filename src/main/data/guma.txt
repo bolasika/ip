@@ -2,3 +2,6 @@ T_1_read book
 D_0_return book_June 6th
 E_0_project meeting_Aug 6th 2_4pm
 T_1_join sports club
+T_0_watch love in the clouds
+D_1_CS2103 IP_tmr
+E_0_CS2109 lecture training_tuesday_friday 

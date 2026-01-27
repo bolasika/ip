@@ -21,4 +21,14 @@ public class DeadlineTask extends Task {
     public String toString() {
         return String.format("[D]%s (by: %s)", super.toString(), this.description);
     }
+
+    /**
+     * Convert DEADLINE task into a single-line format for saving to disk
+     * @return A single-line string encoding this DEADLINE task
+     */
+    @Override
+    public String toFileString() {
+        return String.format("D_%s_%s_%s", getStatus() ? "1" : "0",
+                getTaskName(), this.description);
+    }
 }

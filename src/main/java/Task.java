@@ -30,6 +30,24 @@ public abstract class Task {
     }
 
     /**
+     * Returns whether the task is marked as complete.
+     *
+     * @return True if the task is completed, false otherwise
+     */
+    public boolean getStatus() {
+        return this.isDone;
+    }
+
+    /**
+     * Returns the name of the task.
+     *
+     * @return The task name
+     */
+    public String getTaskName() {
+        return this.taskName;
+    }
+
+    /**
      * String representation of the task
      *
      * @return A string representation of the Task
@@ -39,4 +57,11 @@ public abstract class Task {
         return String.format("[%s] %s",
                 this.isDone ? "X" : " ", taskName);
     }
+
+    /**
+     * Returns a single-line string representation of this task for saving to the data file.
+     *
+     * @return A single-line string representation suitable for file storage
+     */
+    public abstract String toFileString();
 }

@@ -17,7 +17,6 @@ public class Guma {
      */
     public Guma() {
         this.tasks = Storage.loadTask("src/main/data/guma.txt");
-        System.out.println(this.tasks.size());
         this.tasks = (this.tasks == null) ? new ArrayList<>() : this.tasks;
     }
 
@@ -167,6 +166,7 @@ public class Guma {
             action = inp.split(" ")[0].toLowerCase();
             switch (action) {
                 case "bye":
+                    Storage.saveTask(tasks, "src/main/data/guma.txt");
                     System.out.println(this.getFarewell());
                     break;
                 case "list":
