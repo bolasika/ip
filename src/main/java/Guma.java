@@ -1,8 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.File;
 
 public class Guma {
+    /** Storage to deal with loading tasks from file and saving tasks in the file */
+    private Storage storage;
+
     /** Array to store the Task */
     private ArrayList<Task> tasks;
 
@@ -15,8 +17,9 @@ public class Guma {
     /**
      * The Constructor to initialize Guma chatbot instance with empty tasklist
      */
-    public Guma() {
-        this.tasks = Storage.loadTask("src/main/data/guma.txt");
+    public Guma(String filePath) {
+        this.storage = new Storage(filePath);
+        this.tasks = this.storage.loadTask();
         this.tasks = (this.tasks == null) ? new ArrayList<>() : this.tasks;
     }
 
@@ -166,7 +169,7 @@ public class Guma {
             action = inp.split(" ")[0].toLowerCase();
             switch (action) {
                 case "bye":
-                    Storage.saveTask(tasks, "src/main/data/guma.txt");
+                    this.storage.saveTask(tasks);
                     System.out.println(this.getFarewell());
                     break;
                 case "list":
@@ -198,7 +201,7 @@ public class Guma {
      * Creates Guma chatbot instance and starts the session.
      */
     public static void main(String... args) {
-        Guma bot = new Guma();
+        Guma bot = new Guma("src/main/data/guma.txt");
         bot.run();
     }
 }
