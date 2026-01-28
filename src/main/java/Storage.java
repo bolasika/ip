@@ -11,15 +11,20 @@ import java.io.FileWriter;
  * Each task parameters are separated using underscore ("_") separators
  */
 public class Storage {
+    String filePath;
+
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
     /**
      * Loads tasks from the given file path and return them as ArrayList
-     * @param filePath the relative or absolute path to the task data file
      * @return An {@link ArrayList} of loaded {@link Task} objects, or null if the file is not found.
      */
-    public static ArrayList<Task> loadTask(String filePath) {
+    public ArrayList<Task> loadTask() {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
-            File f = new File(filePath);
+            File f = new File(this.filePath);
 
             // If the file do not exist, create the file and return empty ArrayList
             if (!f.exists()) {
@@ -79,13 +84,12 @@ public class Storage {
      * Each line in the text file represent a single task.
      * Each task parameters are separated using underscore ("_") separators
      * @param tasks The {@link ArrayList} of task to be saved
-     * @param filePath The relative or absolute path to the data file to write to.
      * @return {@code true} if the tasks were successfully written to disk, otherwise {@code false}.
      */
-    public static boolean saveTask(ArrayList<Task> tasks, String filePath) {
+    public boolean saveTask(ArrayList<Task> tasks) {
         try {
             StringBuilder sb = new StringBuilder();
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(this.filePath);
             for (Task t : tasks) {
                 sb.append(String.format("%s\n", t.toFileString()));
             }
