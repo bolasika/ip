@@ -35,4 +35,48 @@ public class Parser {
         }
         return input;
     }
+
+    public static Command parse(String fullCommand) throws GumaException {
+        String action = fullCommand.split(" ")[0].toLowerCase();
+        String taskName;
+        switch (action) {
+        case "list":
+            return new ListCommand();
+        case "bye":
+            return new ExitCommand();
+        case "mark":
+            return new CompleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+        case "unmark":
+            return new UndoCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+        case "delete":
+            return new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+        case "todo":
+            try {
+                return new AddCommand(new ToDoTask(fullCommand.split("todo ")[1]));
+            } catch (Exception e) {
+                throw new GumaException(">> ERR: Ensure your Syntax: todo <taskname>");
+            }
+        case "deadline":
+            try {
+                taskName = fullCommand.split("deadline ")[1].split(" /by")[0];
+                String description = fullCommand.split("/by ")[1];
+                return new AddCommand(new DeadlineTask(taskName, description));
+            } catch (Exception e) {
+                throw new GumaException(">> ERR: Ensure your Syntax: deadline <taskname> /by <description>");
+            }
+        case "event":
+            try {
+                taskName = fullCommand.split("event ")[1].split(" /from")[0];
+                String fromTime = fullCommand.split(" /from ")[1].split(" /to ")[0];
+                String toTime = fullCommand.split("/to ")[1];
+                return new AddCommand(new EventTask(taskName, fromTime, toTime));
+            } catch (Exception e) {
+                throw new GumaException(">> ERR: Ensure your Syntax: event <taskname> /from <Start time> /to <End time>");
+            }
+        default:
+            throw new GumaException("\n\t Sorry, I do not recognize the command :-(\n");
+        }
+    }
+
+
 }
