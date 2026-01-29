@@ -1,4 +1,5 @@
 package guma;
+
 import guma.task.TaskList;
 
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class Ui {
     private static final String SEPARATOR = "\t____________________________________________________________\n";
 
     /** Scanner function to read the user input */
-    private final Scanner sc = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Show Separator line
@@ -26,7 +27,7 @@ public class Ui {
      * @return The string entered by the user.
      */
     public String readCommand() {
-        return sc.nextLine();
+        return scanner.nextLine();
     }
     /**
      * A greeting message displayed when the chatbot starts

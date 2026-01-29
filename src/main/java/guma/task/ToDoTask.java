@@ -3,6 +3,7 @@ package guma.task;
 /**
  * Represents a basic task without any specific dates or times.
  *
+ */
 public class ToDoTask extends Task {
 
     /**

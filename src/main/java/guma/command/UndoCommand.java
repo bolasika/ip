@@ -10,7 +10,7 @@ import guma.task.TaskList;
  */
 public class UndoCommand extends Command {
     /** Index of the task to be unmarked in the tasks */
-    private int taskIdx;
+    private int taskIndex;
 
     /**
      * Initializes the command with the index of the task to be unmarked.
@@ -18,7 +18,7 @@ public class UndoCommand extends Command {
      * @param idx The 1-based index of the task.
      */
     public UndoCommand(int idx) {
-        this.taskIdx = idx;
+        this.taskIndex = idx;
     }
 
     /**
@@ -32,7 +32,7 @@ public class UndoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getUndo(tasks.undoTask(this.taskIdx));
+            ui.getUndo(tasks.undoTask(this.taskIndex));
         } catch (Exception e) {
             throw new GumaException(">> ERR: UndoCommand::Unable to unmark task");
         }
