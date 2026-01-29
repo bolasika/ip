@@ -49,6 +49,13 @@ public class Parser {
         return input;
     }
 
+    /**
+     * Interprets the user input and returns the corresponding command.
+     *
+     * @param fullCommand The full string entered by the user.
+     * @return The specific command object to be executed.
+     * @throws GumaException If the command is invalid or has wrong format.
+     */
     public static Command parse(String fullCommand) throws GumaException {
         String action = fullCommand.split(" ")[0].toLowerCase();
         String taskName;

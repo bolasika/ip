@@ -4,6 +4,10 @@ import guma.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * Manages a list of tasks.
+ * Provides methods to add, delete, complete, and undo tasks.
+ */
 public class TaskList {
     /** Array to store the Task */
     private ArrayList<Task> tasks;
@@ -11,6 +15,11 @@ public class TaskList {
     /** Separator line for formatting chatbot */
     private static final String SEPARATOR = "\t____________________________________________________________";
 
+    /**
+     * Initializes the task list with existing tasks.
+     *
+     * @param tasks The initial list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -51,6 +60,7 @@ public class TaskList {
 
     /**
      * Return the size of the ArrayList tasks
+     *
      * @return an Integer representing the size of the ArrayList Tasks
      */
     public int getSize() {
@@ -81,6 +91,12 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Saves the current task list to the provided storage.
+     *
+     * @param storage The storage to save to.
+     * @return true if save was successful, false otherwise.
+     */
     public boolean saveTo(Storage storage) {
         return storage.saveTask(this.tasks);
     }

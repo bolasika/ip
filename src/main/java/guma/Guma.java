@@ -4,6 +4,9 @@ import guma.command.Command;
 import guma.exception.GumaException;
 import guma.task.TaskList;
 
+/**
+ * Main class for the Guma chatbot application.
+ */
 public class Guma {
     /** Storage to deal with loading tasks from file and saving tasks in the file */
     private Storage storage;
@@ -13,7 +16,6 @@ public class Guma {
 
     /** User Interface to deals with interactions with the user */
     private Ui ui;
-
 
     /**
      * The Constructor to initialize Guma chatbot instance
@@ -26,8 +28,8 @@ public class Guma {
 
     /**
      * Run the chatbot session
-     * Print the Greeting message, reads and echos back to the user, until user press "bye"
-     * Print the farewell message
+     * Print the Greeting message, reads and execute back commands executed by the user,
+     * until user press "bye" and print the farewell message
      */
     public void run() {
         this.ui.showLine();

@@ -3,6 +3,10 @@ import guma.task.TaskList;
 
 import java.util.Scanner;
 
+/**
+ * Handles communication with the user.
+ * Provides methods to show messages and read user input.
+ */
 public class Ui {
     /** Separator line for formatting chatbot */
     private static final String SEPARATOR = "\t____________________________________________________________\n";
@@ -18,7 +22,8 @@ public class Ui {
     }
 
     /**
-     * Read user input
+     * Reads the input from the user.
+     * @return The string entered by the user.
      */
     public String readCommand() {
         return sc.nextLine();
@@ -40,7 +45,8 @@ public class Ui {
     }
 
     /**
-     * Output a formatted list of task stored in Tasklist
+     * Prints the list of tasks currently in the task list.
+     * @param tasks The task list containing tasks to be displayed.
      */
     public void getListing(TaskList tasks) {
         System.out.println(String.format("\n\tHere are the tasks in your list:\n%s",
@@ -48,21 +54,25 @@ public class Ui {
     }
 
     /**
-     * Completion Task Message
+     * Notifies the user that a task has been marked as completed.
+     * @param taskName The description of the completed task.
      */
     public void getCompletion(String taskName) {
         System.out.println(String.format("\tNice! I've marked this task as done:\n\t%s", taskName));
     }
 
     /**
-     * Undo Task Message
+     * Notifies the user that a task has been marked as not completed.
+     * @param taskName The description of the task.
      */
     public void getUndo(String taskName) {
         System.out.println(String.format("\tOk, I've marked this task as not done yet:\n\t%s", taskName));
     }
 
     /**
-     * Deletion of Task message
+     * Notifies the user that a task has been deleted and shows the updated list size.
+     * @param taskName The description of the deleted task.
+     * @param size The current number of tasks in the list.
      */
     public void getDeletion(String taskName, int size) {
         System.out.println(String.format("\tNoted, I've removed this task:\n\t %s" +
@@ -71,7 +81,9 @@ public class Ui {
     }
 
     /**
-     * Added of task message
+     * Notifies the user that a task has been added and shows the updated list size.
+     * @param taskName The description of the added task.
+     * @param size The current number of tasks in the list.
      */
     public void getAdd(String taskName, int size) {
         System.out.println(String.format("\tGot it. I've added this task:\n" + "\t %s\n" +
@@ -79,14 +91,15 @@ public class Ui {
     }
 
     /**
-     * Error Message
+     * Displays an error message to the user.
+     * @param message The error message to be displayed.
      */
     public void showError(String message) {
         System.out.println("\t " + message);
     }
 
     /**
-     * Unknown message
+     * Notifies the user that the command was not recognized.
      */
     public void getUnknown() {
         System.out.println(SEPARATOR + "\n\t Sorry, I do not recognize the command :-(\n"+SEPARATOR);
