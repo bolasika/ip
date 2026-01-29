@@ -1,15 +1,16 @@
 package guma;
 
-import guma.task.Task;
-import guma.task.ToDoTask;
-import guma.task.DeadlineTask;
-import guma.task.EventTask;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
+
+import guma.task.DeadlineTask;
+import guma.task.EventTask;
+import guma.task.Task;
+import guma.task.ToDoTask;
 
 /**
  * Handles loading and storing task data from text file on disk

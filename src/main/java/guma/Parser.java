@@ -1,19 +1,20 @@
 package guma;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
 import guma.command.AddCommand;
 import guma.command.Command;
+import guma.command.CompleteCommand;
 import guma.command.DeleteCommand;
 import guma.command.ExitCommand;
 import guma.command.ListCommand;
 import guma.command.UndoCommand;
-import guma.command.CompleteCommand;
 import guma.exception.GumaException;
-import guma.task.ToDoTask;
 import guma.task.DeadlineTask;
 import guma.task.EventTask;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+import guma.task.ToDoTask;
 
 /**
  * Utility class for validating user inputs and outputs

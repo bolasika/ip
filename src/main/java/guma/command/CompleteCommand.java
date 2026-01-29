@@ -2,9 +2,6 @@ package guma.command;
 
 import guma.Storage;
 import guma.Ui;
-
-import guma.Storage;
-import guma.Ui;
 import guma.exception.GumaException;
 import guma.task.TaskList;
 
@@ -13,7 +10,7 @@ import guma.task.TaskList;
  */
 public class CompleteCommand extends Command {
     /** Index of the task to be marked complete in the tasks */
-    private int taskIdx;
+    private int taskIndex;
 
     /**
      * Initializes the command with the index of the task to be marked.
@@ -21,7 +18,7 @@ public class CompleteCommand extends Command {
      * @param idx The 1-based index of the task.
      */
     public CompleteCommand(int idx) {
-        this.taskIdx = idx;
+        this.taskIndex = idx;
     }
 
     /**
@@ -34,7 +31,7 @@ public class CompleteCommand extends Command {
      */    @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getCompletion(tasks.completeTask(this.taskIdx));
+            ui.getCompletion(tasks.completeTask(this.taskIndex));
         } catch (Exception e) {
             throw new GumaException(">> ERR: CompleteCommand::Unable to mark task as complete");
         }
