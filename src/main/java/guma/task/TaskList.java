@@ -100,5 +100,21 @@ public class TaskList {
         return storage.saveTask(this.tasks);
     }
 
+    /**
+     * Find and return the formatted list of tasks that contains the user input
+     *
+     * @param taskName  The keyword to be searched in the tasklist
+     * @return A formatted string output for the tasks; if no result, empty string
+     */
+    public String getFindTaskListing(String taskName) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, c = 1; i < tasks.size(); i++) {
+            if (tasks.get(i).getTaskName().contains(taskName)) {
+                sb.append(String.format("\t%s. %s\n", c, tasks.get(i)));
+                c += 1;
+            }
+        }
+        return sb.toString();
+    }
 
 }
