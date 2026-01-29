@@ -11,6 +11,7 @@ import guma.command.DeleteCommand;
 import guma.command.ExitCommand;
 import guma.command.ListCommand;
 import guma.command.UndoCommand;
+import guma.command.FindCommand;
 import guma.exception.GumaException;
 import guma.task.DeadlineTask;
 import guma.task.EventTask;
@@ -93,6 +94,13 @@ public class Parser {
                 return new AddCommand(new EventTask(taskName, fromTime, toTime));
             } catch (Exception e) {
                 throw new GumaException(">> ERR: Ensure your Syntax: event <taskname> /from <Start time> /to <End time>");
+            }
+        case "find":
+            try {
+                taskName = fullCommand.split("find ")[1];
+                return new FindCommand(taskName);
+            } catch (Exception e) {
+                throw new GumaException(">> ERR: Ensure your Syntax: find <taskname>");
             }
         default:
             throw new GumaException("\n\t Sorry, I do not recognize the command :-(\n");

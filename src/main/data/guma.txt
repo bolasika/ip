@@ -7,3 +7,4 @@ D_1_CS2103 IP_tmr
 E_0_CS2109 lecture training_tuesday_friday 
 E_0_Eg1131 project_28/11/2002 1101_2002-11-30 1829
 T_0_listen song
+E_0_IU song concert_friday_monday
