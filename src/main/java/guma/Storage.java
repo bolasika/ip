@@ -17,8 +17,14 @@ import java.io.FileWriter;
  * Each task parameters are separated using underscore ("_") separators
  */
 public class Storage {
-    String filePath;
+    /** The path to the file where tasks are stored. */
+    private String filePath;
 
+    /**
+     * Constructor for Storage:
+     * Initializes the storage with the specified file path.
+     * @param filePath Path to the data file.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }

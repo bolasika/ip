@@ -2,16 +2,22 @@ package guma.task;
 
 import guma.Parser;
 
+/**
+ * Represents a task that occurs during a specific time period.
+ */
 public class EventTask extends Task {
     /** String representation of the Start date / time */
     private String startTime;
+    /**
+     * String representation of the End date / time */
     private String endTime;
 
     /**
      * Constructor of EventTask
+     *
      * @param taskName name of the task
-     * @param from The start date / time of the event
-     * @param to The end date / time of the event
+     * @param from     The start date / time of the event
+     * @param to       The end date / time of the event
      */
     public EventTask(String taskName, String from, String to) {
         super(taskName);
@@ -32,6 +38,7 @@ public class EventTask extends Task {
 
     /**
      * Convert Event task into a single-line format for saving to disk
+     *
      * @return A single-line string encoding this Event task
      */
     @Override

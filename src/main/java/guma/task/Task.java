@@ -1,5 +1,8 @@
 package guma.task;
 
+/**
+ * Providing an abstraction for all classes in the Guma application.
+ */
 public abstract class Task {
     /** Name of the Task */
     private String taskName;
@@ -61,7 +64,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns a single-line string representation of this task for saving to the data file.
+     * Returns a single-line string representation of this task for saving to the
+     * data file.
      *
      * @return A single-line string representation suitable for file storage
      */

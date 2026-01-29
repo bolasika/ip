@@ -1,9 +1,13 @@
 package guma.task;
 
+/**
+ * Represents a basic task without any specific dates or times.
+ *
 public class ToDoTask extends Task {
 
     /**
      * Constructor of ToDo Task
+     *
      * @param taskName Name of the task
      */
     public ToDoTask(String taskName) {
@@ -22,6 +26,7 @@ public class ToDoTask extends Task {
 
     /**
      * Convert ToDo task into a single-line format for saving to disk
+     *
      * @return A single-line string encoding Todo task
      */
     @Override

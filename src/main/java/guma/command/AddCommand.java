@@ -6,10 +6,18 @@ import guma.exception.GumaException;
 import guma.task.Task;
 import guma.task.TaskList;
 
+/**
+ * Command to add a task to the task list.
+ */
 public class AddCommand extends Command {
     /** Task to be added into the tasklist */
     private Task task;
 
+    /**
+     * Initializes the command with the task to be added.
+     *
+     * @param task The task to add.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
