@@ -5,7 +5,7 @@ import guma.exception.GumaException;
 import guma.task.TaskList;
 
 /**
- * Main class for the Guma chatbot application.
+ * Main class for the Guma chatbot application. Test
  */
 public class Guma {
     /** Storage to deal with loading tasks from file and saving tasks in the file */
