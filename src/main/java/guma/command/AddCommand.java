@@ -23,11 +23,11 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getAdd(tasks.addTask(this.task), tasks.getSize());
+            return ui.getAdd(tasks.addTask(this.task), tasks.getSize());
         } catch (Exception e) {
-            System.out.println(">> ERR: Unable to add task into the TaskList!");
+            throw new GumaException(">> ERR: AddCommand::Unable to mark task as complete");
         }
     }
 }

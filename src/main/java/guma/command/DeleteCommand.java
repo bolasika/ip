@@ -30,9 +30,9 @@ public class DeleteCommand extends Command {
      * @throws GumaException If the task index is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getDeletion(tasks.deleteTask(this.taskIndex), tasks.getSize());
+            return ui.getDeletion(tasks.deleteTask(this.taskIndex), tasks.getSize());
         } catch (Exception e) {
             throw new GumaException(">> ERR: DeleteCommand::Unable to delete task!");
         }
