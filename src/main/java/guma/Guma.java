@@ -38,6 +38,7 @@ public class Guma {
         boolean isExit = false;
         while (!isExit) {
             try {
+                System.out.println("here??");
                 String fullCommand = this.ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
@@ -58,5 +59,21 @@ public class Guma {
     public static void main(String... args) {
         Guma bot = new Guma("src/main/data/guma.txt");
         bot.run();
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        String output;
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, ui, storage);
+        } catch (GumaException e) {
+            ui.showError(e.getMessage());
+            output = "Sorry, I do not recognize the command...";
+        }
+
+        return output;
     }
 }

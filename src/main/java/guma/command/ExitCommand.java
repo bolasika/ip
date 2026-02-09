@@ -18,10 +18,10 @@ public class ExitCommand extends Command {
      * @throws GumaException If there is an error saving tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
             tasks.saveTo(storage);
-            ui.getFarewell();
+            return ui.getFarewell();
         } catch (Exception e) {
             throw new GumaException(">> ERR: ExitCommand::Error in saving files!");
         }

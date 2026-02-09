@@ -41,33 +41,33 @@ public class Ui {
      * A farewell message displayed when the chatbot ends
      *
      */
-    public void getFarewell() {
-        System.out.println("\t Bye. Hope to see you again soon!");
+    public String getFarewell() {
+        return "\t Bye. Hope to see you again soon!";
     }
 
     /**
      * Prints the list of tasks currently in the task list.
      * @param tasks     The task list containing tasks to be displayed.
      */
-    public void getListing(TaskList tasks) {
-        System.out.println(String.format("\n\tHere are the tasks in your list:\n%s",
-                tasks.getTaskListing()));
+    public String getListing(TaskList tasks) {
+        return String.format("\n\tHere are the tasks in your list:\n%s",
+                tasks.getTaskListing());
     }
 
     /**
      * Notifies the user that a task has been marked as completed.
      * @param taskName  The description of the completed task.
      */
-    public void getCompletion(String taskName) {
-        System.out.println(String.format("\tNice! I've marked this task as done:\n\t%s", taskName));
+    public String getCompletion(String taskName) {
+        return String.format("\tNice! I've marked this task as done:\n\t%s", taskName);
     }
 
     /**
      * Notifies the user that a task has been marked as not completed.
      * @param taskName  The description of the task.
      */
-    public void getUndo(String taskName) {
-        System.out.println(String.format("\tOk, I've marked this task as not done yet:\n\t%s", taskName));
+    public String getUndo(String taskName) {
+        return String.format("\tOk, I've marked this task as not done yet:\n\t%s", taskName);
     }
 
     /**
@@ -75,10 +75,10 @@ public class Ui {
      * @param taskName  The description of the deleted task.
      * @param size      The current number of tasks in the list.
      */
-    public void getDeletion(String taskName, int size) {
-        System.out.println(String.format("\tNoted, I've removed this task:\n\t %s" +
+    public String getDeletion(String taskName, int size) {
+        return String.format("\tNoted, I've removed this task:\n\t %s" +
                         "\n\t Now you have %s tasks in the list",
-                taskName, size));
+                taskName, size);
     }
 
     /**
@@ -86,9 +86,9 @@ public class Ui {
      * @param taskName  The description of the added task.
      * @param size      The current number of tasks in the list.
      */
-    public void getAdd(String taskName, int size) {
-        System.out.println(String.format("\tGot it. I've added this task:\n" + "\t %s\n" +
-                        "\tNow you have %s tasks in the list", taskName, size));
+    public String getAdd(String taskName, int size) {
+        return String.format("\tGot it. I've added this task:\n" + "\t %s\n" +
+                        "\tNow you have %s tasks in the list", taskName, size);
     }
 
     /**
@@ -110,12 +110,12 @@ public class Ui {
      * Prints the list of tasks that matches the user input
      * @param message   The formatted String representation of the tasks to be displayed
      */
-    public void getFindListing(String message) {
+    public String getFindListing(String message) {
         if (message.isEmpty()) {
-            System.out.println("\t Unable to find any matching tasks in your list.");
+            return "\t Unable to find any matching tasks in your list.";
         } else {
-            System.out.println(String.format("\n\tHere are the matching tasks in your list:\n%s",
-                    message));
+            return String.format("\n\tHere are the matching tasks in your list:\n%s",
+                    message);
         }
     }
 }

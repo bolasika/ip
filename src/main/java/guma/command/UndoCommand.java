@@ -30,9 +30,9 @@ public class UndoCommand extends Command {
      * @throws GumaException If the task index is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getUndo(tasks.undoTask(this.taskIndex));
+            return ui.getUndo(tasks.undoTask(this.taskIndex));
         } catch (Exception e) {
             throw new GumaException(">> ERR: UndoCommand::Unable to unmark task");
         }

@@ -24,9 +24,9 @@ public class FindCommand extends Command {
      * @throws GumaException If there is an error listing tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getFindListing(tasks.getFindTaskListing(this.taskName));
+            return ui.getFindListing(tasks.getFindTaskListing(this.taskName));
         } catch (Exception e) {
             throw new GumaException(">> ERR: FindTask::Unable to find and list tasks!");
         }

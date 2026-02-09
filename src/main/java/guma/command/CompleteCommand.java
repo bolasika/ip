@@ -29,9 +29,10 @@ public class CompleteCommand extends Command {
      * @param storage The storage to save/load data.
      * @throws GumaException If the task index is invalid.
      */    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
-            ui.getCompletion(tasks.completeTask(this.taskIndex));
+            return ui.getCompletion(tasks.completeTask(this.taskIndex));
+
         } catch (Exception e) {
             throw new GumaException(">> ERR: CompleteCommand::Unable to mark task as complete");
         }
