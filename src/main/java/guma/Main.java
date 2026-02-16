@@ -12,7 +12,6 @@ import javafx.stage.Stage;
  * A GUI for Guma using FXML.
  */
 public class Main extends Application {
-
     private Guma guma = new Guma("src/main/data/guma.txt");
 
     @Override
@@ -23,7 +22,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setGuma(guma);
+            fxmlLoader.<MainWindow>getController().setGuma(guma, stage);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,4 +36,5 @@ public class Main extends Application {
         stage.setMinHeight(600.0);
         return stage;
     }
+
 }
