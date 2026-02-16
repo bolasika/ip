@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for the main GUI.
  */
@@ -22,8 +23,8 @@ public class MainWindow extends AnchorPane {
 
     private Guma guma;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/boy.png"));
-    private Image gumaImage = new Image(this.getClass().getResourceAsStream("/images/guma.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image gumaImage = new Image(this.getClass().getResourceAsStream("/images/guma.png"));
 
     @FXML
     public void initialize() {
@@ -33,6 +34,10 @@ public class MainWindow extends AnchorPane {
     /** Injects the Guma instance */
     public void setGuma(Guma g) {
         guma = g;
+        String greeting = "Hello! I'm Guma\nWhat can I do for you?";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getGumaDialog(greeting, gumaImage)
+        );
     }
 
     /**

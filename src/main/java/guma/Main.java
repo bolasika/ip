@@ -2,8 +2,6 @@ package guma;
 
 import java.io.IOException;
 
-import guma.Guma;
-import guma.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,6 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            stage = setStage(stage);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
@@ -29,5 +28,13 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Stage setStage(Stage stage) {
+        stage.setWidth(600.0);
+        stage.setHeight(700.0);
+        stage.setMinWidth(500.0);
+        stage.setMinHeight(600.0);
+        return stage;
     }
 }
