@@ -18,7 +18,8 @@ public class Guma {
     private Ui ui;
 
     /**
-     * The Constructor to initialize Guma chatbot instance
+     * Constructs a Guma chatbot instance with the given storage file path.
+     * @param filePath Path to the data file used for loading and saving tasks.
      */
     public Guma(String filePath) {
         this.ui = new Ui();
@@ -27,9 +28,8 @@ public class Guma {
     }
 
     /**
-     * Run the chatbot session
-     * Print the Greeting message, reads and execute back commands executed by the user,
-     * until user press "bye" and print the farewell message
+     * Runs the chatbot session.
+     * Prints the greeting, reads and executes user commands, and ends when "bye" is issued.
      */
     public void run() {
         this.ui.showLine();
@@ -37,23 +37,33 @@ public class Guma {
         this.ui.showLine();
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String fullCommand = this.ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                ui.showLine();
-                isExit = c.isExit();
-            } catch (GumaException e) {
-                ui.showError(e.getMessage());
-                ui.showLine();
-            }
+            isExit = parsingCommands(isExit);
         }
+    }
 
+    /**
+     * Reads one command, executes it, and returns whether the session should exit.
+     * @param isExit Current exit flag before processing this command.
+     * @return {@code true} if the last command requests exit, otherwise {@code false}.
+     */
+    private boolean parsingCommands(boolean isExit) {
+        try {
+            String fullCommand = this.ui.readCommand();
+            ui.showLine();
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+            ui.showLine();
+            isExit = c.isExit();
+        } catch (GumaException e) {
+            ui.showError(e.getMessage());
+            ui.showLine();
+        }
+        return isExit;
     }
 
     /**
      * Creates Guma chatbot instance and starts the session.
+     * @param args Command-line arguments (not used).
      */
     public static void main(String... args) {
         Guma bot = new Guma("src/main/data/guma.txt");
@@ -61,7 +71,9 @@ public class Guma {
     }
 
     /**
-     * Generates a response for the user's chat message.
+     * Generates a response for the given user input in GUI
+     * @param input The user input string.
+     * @return The chatbot response text.
      */
     public String getResponse(String input) {
         String output;

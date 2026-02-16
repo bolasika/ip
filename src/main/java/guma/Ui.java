@@ -1,8 +1,9 @@
 package guma;
+import java.util.Scanner;
 
 import guma.task.TaskList;
 
-import java.util.Scanner;
+
 
 /**
  * Handles communication with the user.
@@ -76,8 +77,7 @@ public class Ui {
      * @param size      The current number of tasks in the list.
      */
     public String getDeletion(String taskName, int size) {
-        return String.format("\tNoted, I've removed this task:\n\t %s" +
-                        "\n\t Now you have %s tasks in the list",
+        return String.format("\tNoted, I've removed this task:\n\t %s\n\t Now you have %s tasks in the list",
                 taskName, size);
     }
 
@@ -87,8 +87,8 @@ public class Ui {
      * @param size      The current number of tasks in the list.
      */
     public String getAdd(String taskName, int size) {
-        return String.format("\tGot it. I've added this task:\n" + "\t %s\n" +
-                        "\tNow you have %s tasks in the list", taskName, size);
+        return String.format("\tGot it. I've added this task:\n\t %s\n\tNow you have %s tasks in the list",
+                taskName, size);
     }
 
     /**
@@ -103,7 +103,7 @@ public class Ui {
      * Notifies the user that the command was not recognized.
      */
     public void getUnknown() {
-        System.out.println(SEPARATOR + "\n\t Sorry, I do not recognize the command :-(\n"+SEPARATOR);
+        System.out.println(SEPARATOR + "\n\t Sorry, I do not recognize the command :-(\n" + SEPARATOR);
     }
 
     /**
