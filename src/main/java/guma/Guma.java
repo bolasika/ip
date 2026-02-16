@@ -38,7 +38,6 @@ public class Guma {
         boolean isExit = false;
         while (!isExit) {
             try {
-                System.out.println("here??");
                 String fullCommand = this.ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
