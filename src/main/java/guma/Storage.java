@@ -154,9 +154,8 @@ public class Storage {
     private boolean savingTasksToLocal(ArrayList<Task> tasks) throws IOException {
         StringBuilder sb = new StringBuilder();
         FileWriter fw = new FileWriter(this.filePath);
-        for (Task t : tasks) {
-            sb.append(String.format("%s\n", t.toFileString()));
-        }
+        tasks.stream()
+             .forEach(eachTask -> sb.append(String.format("%s\n", eachTask.toFileString())));
         fw.write(sb.toString());
         fw.close();
         return true;
