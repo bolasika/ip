@@ -1,23 +1,26 @@
 package guma.task;
+import java.time.LocalDateTime;
 
 import guma.Parser;
+
+
 
 /**
  * Represents a task with a deadline.
  */
 public class DeadlineTask extends Task {
     /** String representation on the due date */
-    private String description;
+    private LocalDateTime date;
 
     /**
      * Constructor of Deadline Task
      *
      * @param taskName    name of the task
-     * @param description The specific date / time that is due on
+     * @param date The specific date / time that is due on
      */
-    public DeadlineTask(String taskName, String description) {
+    public DeadlineTask(String taskName, LocalDateTime date) {
         super(taskName);
-        this.description = description;
+        this.date = date;
     }
 
     /**
@@ -28,7 +31,7 @@ public class DeadlineTask extends Task {
     @Override
     public String toString() {
         return String.format("[D]%s (by: %s)",
-                super.toString(), Parser.dateChecker(this.description));
+                super.toString(), Parser.dateToString(this.date));
     }
 
     /**
@@ -39,6 +42,6 @@ public class DeadlineTask extends Task {
     @Override
     public String toFileString() {
         return String.format("D_%s_%s_%s", getStatus() ? "1" : "0",
-                getTaskName(), this.description);
+                getTaskName(), Parser.dateToSave(this.date));
     }
 }

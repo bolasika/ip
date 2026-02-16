@@ -2,15 +2,17 @@ package guma.task;
 
 import guma.Parser;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task that occurs during a specific time period.
  */
 public class EventTask extends Task {
     /** String representation of the Start date / time */
-    private String startTime;
+    private LocalDateTime startTime;
     /**
      * String representation of the End date / time */
-    private String endTime;
+    private LocalDateTime endTime;
 
     /**
      * Constructor of EventTask
@@ -19,7 +21,7 @@ public class EventTask extends Task {
      * @param from     The start date / time of the event
      * @param to       The end date / time of the event
      */
-    public EventTask(String taskName, String from, String to) {
+    public EventTask(String taskName, LocalDateTime from, LocalDateTime to) {
         super(taskName);
         this.startTime = from;
         this.endTime = to;
@@ -33,7 +35,7 @@ public class EventTask extends Task {
     @Override
     public String toString() {
         return String.format("[E]%s (from: %s to: %s)", super.toString(),
-                Parser.dateChecker(this.startTime), Parser.dateChecker(this.endTime));
+                Parser.dateToString(this.startTime), Parser.dateToString(this.endTime));
     }
 
     /**
@@ -44,6 +46,6 @@ public class EventTask extends Task {
     @Override
     public String toFileString() {
         return String.format("E_%s_%s_%s_%s", getStatus() ? "1" : "0",
-                getTaskName(), this.startTime, this.endTime);
+                getTaskName(), Parser.dateToSave(this.startTime), Parser.dateToSave(this.endTime));
     }
 }

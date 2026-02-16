@@ -1,8 +1,2 @@
-T_1_read book
-D_0_return book_June 6th
-E_0_project meeting_Aug 6th 2_4pm
-T_1_join sports club
-T_0_watch love in the clouds
-D_1_CS2103 IP_tmr
-E_0_CS2109 lecture training_tuesday_friday 
-T_0_luyuxiao
+D_0_CS2103_17/2/2026 0400
+E_0_Chinese New Year_17/2/2026 0000_19/2/2026 0000

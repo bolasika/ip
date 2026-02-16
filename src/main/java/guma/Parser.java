@@ -36,17 +36,32 @@ public class Parser {
      * @param input The user input data that was stored in the Task
      * @return A normalized date-time string if matches the regex, else original input.
      */
-    public static String dateChecker(String input) {
-        DateTimeFormatter dateFmter = null;
+    public static LocalDateTime dateChecker(String input) {
         if (input.matches(REGEX_SLASH_DMY)) {
-            dateFmter = DateTimeFormatter.ofPattern("d/M/uuuu HHmm");
+            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/M/uuuu HHmm"));
         } else if (input.matches(REGEX_DASH_YMD)) {
-            dateFmter = DateTimeFormatter.ofPattern("uuuu-MM-d HHmm");
+            return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("uuuu-MM-d HHmm"));
         } else {
-            return input;
+            throw new GumaException("No matching pattern for Date inputs");
         }
-        LocalDateTime date = LocalDateTime.parse(input, dateFmter);
+    }
+
+    /**
+     * The String Representation of the LocalDateTime type
+     * @param date The date to be changed into String representation
+     * @return String Representation of the LocalDateTime type
+     */
+    public static String dateToString(LocalDateTime date) {
         return date.format(DateTimeFormatter.ofPattern("MMM dd uuuu h.mma", Locale.ENGLISH));
+    }
+
+    /**
+     * Convert LocalDateTime type to a String type so that it can be saved into a Local file
+     * @param date The date to be saved into the Local File
+     * @return A String with the correct syntax to be saved into the Local file
+     */
+    public static String dateToSave(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("d/M/uuuu HHmm", Locale.ENGLISH));
     }
 
     /**
@@ -108,7 +123,7 @@ public class Parser {
         try {
             taskName = fullCommand.split("deadline ")[1].split(" /by")[0];
             String description = fullCommand.split("/by ")[1];
-            return new AddCommand(new DeadlineTask(taskName, description));
+            return new AddCommand(new DeadlineTask(taskName, Parser.dateChecker(description)));
         } catch (Exception e) {
             throw new GumaException(">> ERR: Ensure your Syntax: deadline <taskname> /by <description>");
         }
@@ -125,7 +140,7 @@ public class Parser {
             String taskName = fullCommand.split("event ")[1].split(" /from")[0];
             String fromTime = fullCommand.split(" /from ")[1].split(" /to ")[0];
             String toTime = fullCommand.split("/to ")[1];
-            return new AddCommand(new EventTask(taskName, fromTime, toTime));
+            return new AddCommand(new EventTask(taskName, Parser.dateChecker(fromTime), Parser.dateChecker(toTime)));
         } catch (Exception e) {
             throw new GumaException(">> ERR: Ensure your Syntax: event <taskname> /from <Start time> /to <End time>");
         }
