@@ -1,6 +1,7 @@
 package guma;
 import java.util.Scanner;
 
+import guma.command.CommandList;
 import guma.task.TaskList;
 
 
@@ -117,5 +118,14 @@ public class Ui {
             return String.format("\n\tHere are the matching tasks in your list:\n%s",
                     message);
         }
+    }
+
+    public String getHelpListing() {
+        StringBuilder sb = new StringBuilder();
+        for (CommandList e : CommandList.values()) {
+            sb.append(e.toString() + "\n");
+        }
+        sb.append("========================\nTAKE NOTE: <Date> format are:\n1. d/M/uuuu HHmm\n 2. uuuu-MM-d HHmm\n========================");
+        return sb.toString();
     }
 }

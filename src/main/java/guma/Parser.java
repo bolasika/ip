@@ -10,6 +10,7 @@ import guma.command.CompleteCommand;
 import guma.command.DeleteCommand;
 import guma.command.ExitCommand;
 import guma.command.FindCommand;
+import guma.command.HelpCommand;
 import guma.command.ListCommand;
 import guma.command.UndoCommand;
 import guma.exception.GumaException;
@@ -93,6 +94,8 @@ public class Parser {
             return parseEventCommand(fullCommand);
         case "find":
             return parseFindCommand(fullCommand);
+        case "help":
+            return new HelpCommand();
         default:
             throw new GumaException("\n\t Sorry, I do not recognize the command :-(\n");
         }
