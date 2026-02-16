@@ -28,7 +28,8 @@ public class CompleteCommand extends Command {
      * @param ui      The user interface to show messages.
      * @param storage The storage to save/load data.
      * @throws GumaException If the task index is invalid.
-     */    @Override
+     */
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
         try {
             return ui.getCompletion(tasks.completeTask(this.taskIndex));
