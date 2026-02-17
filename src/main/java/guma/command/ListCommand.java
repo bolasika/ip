@@ -22,7 +22,9 @@ public class ListCommand extends Command {
         try {
             return ui.getListing(tasks);
         } catch (Exception e) {
-            throw new GumaException(">> ERR: ListCommand::Unable to list tasks!");
+            throw new GumaException(">> Weird sia, cannot list tasks.\n"
+                    +
+                    "You sure you type correctly ah?");
         }
     }
 }

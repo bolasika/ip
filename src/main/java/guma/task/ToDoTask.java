@@ -1,7 +1,6 @@
 package guma.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Represents a basic task without any specific dates or times.

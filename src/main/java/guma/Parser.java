@@ -5,7 +5,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import guma.command.*;
+import guma.command.AddCommand;
+import guma.command.Command;
+import guma.command.CompleteCommand;
+import guma.command.DeleteCommand;
+import guma.command.ExitCommand;
+import guma.command.FindCommand;
+import guma.command.HelpCommand;
+import guma.command.ListCommand;
+import guma.command.ScheduleCommand;
+import guma.command.UndoCommand;
 import guma.exception.GumaException;
 import guma.task.DeadlineTask;
 import guma.task.EventTask;
@@ -30,13 +39,15 @@ public class Parser {
      * @param input The user input data that was stored in the Task
      * @return A normalized date-time string if matches the regex, else original input.
      */
-    public static LocalDateTime dateChecker(String input) {
+    public static LocalDateTime dateTimeChecker(String input) {
         if (input.matches(REGEX_SLASH_DMY)) {
             return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/M/uuuu HHmm"));
         } else if (input.matches(REGEX_DASH_YMD)) {
             return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("uuuu-MM-d HHmm"));
         } else {
-            throw new GumaException(">> No matching pattern for Date inputs");
+            throw new GumaException(">> You sure your date pattern got follow mine anot.\n"
+                    +
+                    "I only accept these 2 formats:\n1) dd/MM/yyyy HHmm\n2) yyyy-MM-dd HHmm");
         }
     }
 
@@ -92,8 +103,9 @@ public class Parser {
         case "schedule":
             return parseScheduleCommand(fullCommand);
         default:
-            throw new GumaException(
-                    ">> Sorry, I do not recognize the command :-(\nhelp command to see the available commands");
+            throw new GumaException(">> Wah lao, what you mean?\n"
+                    +
+                    "Run help command if you don't know lei...");
         }
     }
 
@@ -107,7 +119,7 @@ public class Parser {
         try {
             return new AddCommand(new ToDoTask(fullCommand.split("todo ")[1]));
         } catch (Exception e) {
-            throw new GumaException(">> Ensure your Syntax: todo <taskname>");
+            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for todo is: todo <taskname>");
         }
     }
 
@@ -122,9 +134,11 @@ public class Parser {
         try {
             taskName = fullCommand.split("deadline ")[1].split(" /by")[0];
             String description = fullCommand.split("/by ")[1];
-            return new AddCommand(new DeadlineTask(taskName, Parser.dateChecker(description)));
+            return new AddCommand(new DeadlineTask(taskName, Parser.dateTimeChecker(description)));
         } catch (Exception e) {
-            throw new GumaException(">> Ensure your Syntax: deadline <taskname> /by <description>");
+            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for deadline is: \ndeadline "
+                    +
+                    "<taskname> /by <DateTime>\n<DateTime> got format one ah: dd/MM/yyyy HHmm or yyyy-MM-dd HHmm");
         }
     }
 
@@ -139,9 +153,14 @@ public class Parser {
             String taskName = fullCommand.split("event ")[1].split(" /from")[0];
             String fromTime = fullCommand.split(" /from ")[1].split(" /to ")[0];
             String toTime = fullCommand.split("/to ")[1];
-            return new AddCommand(new EventTask(taskName, Parser.dateChecker(fromTime), Parser.dateChecker(toTime)));
+            return new AddCommand(new EventTask(taskName, Parser.dateTimeChecker(fromTime),
+                    Parser.dateTimeChecker(toTime)));
         } catch (Exception e) {
-            throw new GumaException(">> Ensure your Syntax: event <taskname> /from <Start time> /to <End time>");
+            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for event is: "
+                    +
+                    "\nevent <taskname> /from <DateTime> /to <DateTime>\n"
+                    +
+                    "<DateTime> got format one ah: dd/MM/yyyy HHmm or yyyy-MM-dd HHmm");
         }
     }
 
@@ -156,7 +175,7 @@ public class Parser {
             String taskName = fullCommand.split("find ")[1];
             return new FindCommand(taskName);
         } catch (Exception e) {
-            throw new GumaException(">> Ensure your Syntax: find <taskname>");
+            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for find is: \nfind <keyword>");
         }
     }
 
@@ -166,7 +185,9 @@ public class Parser {
             String date = fullCommand.split("/on ")[1];
             return new ScheduleCommand(LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         } catch (Exception e) {
-            throw new GumaException(">> Ensure your Syntax: schedule /on dd/MM/yyyy");
+            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for schedule is: \n"
+                    +
+                    "schedule /on dd/MM/yyyy");
         }
     }
 

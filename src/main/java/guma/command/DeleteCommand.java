@@ -36,7 +36,9 @@ public class DeleteCommand extends Command {
                     : "Select item should be within the task list";
             return ui.getDeletion(tasks.deleteTask(this.taskIndex), tasks.getSize());
         } catch (Exception e) {
-            throw new GumaException(">> ERR: DeleteCommand::Unable to delete task!");
+            throw new GumaException(">> Weird sia, cannot delete this task.\n"
+                    +
+                    "You sure you type correctly ah?\nLike dis: delete <index>");
         }
     }
 }

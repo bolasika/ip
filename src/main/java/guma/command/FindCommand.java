@@ -28,7 +28,9 @@ public class FindCommand extends Command {
         try {
             return ui.getFindListing(tasks.getFindTaskListing(this.taskName));
         } catch (Exception e) {
-            throw new GumaException(">> ERR: FindTask::Unable to find and list tasks!");
+            throw new GumaException(">> Weird sia, cannot find this task.\n"
+                    +
+                    "You sure you type correctly ah?\nLike dis: find <keyword>");
         }
     }
 }

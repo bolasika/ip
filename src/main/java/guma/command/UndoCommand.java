@@ -36,7 +36,9 @@ public class UndoCommand extends Command {
                     : "Select item should be within the task list";
             return ui.getUndo(tasks.undoTask(this.taskIndex));
         } catch (Exception e) {
-            throw new GumaException(">> ERR: UndoCommand::Unable to unmark task");
+            throw new GumaException(">> weird sia, cannot unmark this task.\n"
+                    +
+                    "You sure you type correctly ah?\nLike dis: unmark <index>");
         }
     }
 }

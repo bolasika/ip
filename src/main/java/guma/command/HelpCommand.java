@@ -11,6 +11,12 @@ import guma.task.TaskList;
 public class HelpCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
-        return ui.getHelpListing();
+        try {
+            return ui.getHelpListing();
+        } catch (Exception e) {
+            throw new GumaException(">> Weird sia, cannot show help listing.\n"
+                    +
+                    "You sure you type correctly ah?");
+        }
     }
 }

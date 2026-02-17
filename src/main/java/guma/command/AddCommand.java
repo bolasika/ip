@@ -27,7 +27,9 @@ public class AddCommand extends Command {
         try {
             return ui.getAdd(tasks.addTask(this.task), tasks.getSize());
         } catch (Exception e) {
-            throw new GumaException(">> ERR: AddCommand::Unable to mark task as complete");
+            throw new GumaException(">> Weird sia, cannot add this task.\n"
+                    +
+                    "You sure you type correctly ah?\nGot many type of task to add you know anot?");
         }
     }
 }

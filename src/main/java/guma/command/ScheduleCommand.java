@@ -28,7 +28,9 @@ public class ScheduleCommand extends Command {
         try {
             return ui.getScheduleListing(tasks, this.targetDate);
         } catch (Exception e) {
-            throw new GumaException(">> ERR: ScheduleCommand::execute()");
+            throw new GumaException(">> Weird sia, cannot show schedule listing.\n"
+                    +
+                    "You sure you type correctly ah?\nLike dis: schedule /on dd/MM/yyyy");
         }
     }
 }
