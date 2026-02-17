@@ -96,7 +96,7 @@ public class Ui {
      * @param size      The current number of tasks in the list.
      */
     public String getAdd(String taskName, int size) {
-        return String.format("\tJia lat, got one more task added: \n%s\nNow you have %s tasks in the list liao",
+        return String.format("Jia lat, got one more task added: \n%s\nNow you have %s tasks in the list liao",
                 taskName, size);
     }
 
@@ -129,15 +129,17 @@ public class Ui {
     }
 
     public String getHelpListing() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Wa a lot of command sia, you can remember anot? "
+                +
+                "\nHere are the commands:\n");
         for (CommandList e : CommandList.values()) {
-            sb.append(e.toString() + "\n");
+            sb.append("- " + e.toString());
         }
-        sb.append("========================\n"
+        sb.append("\n===============================\n"
                 +
-                "Remember my <DateTime> format ah:\n1. d/M/uuuu HHmm\n 2. uuuu-MM-d HHmm\n"
+                "<DateTime> format special one lei, remember ah:\n1. dd/mm/yyyy HHmm\n 2. yyyy-MM-dd HHmm\n"
                 +
-                "========================");
+                "===============================");
         return sb.toString();
     }
 
@@ -147,8 +149,8 @@ public class Ui {
         if (result.isEmpty()) {
             return String.format("SHIOK! Nothing is schedule on: %s\nCAN LEPAK!", target);
         }
-        for (int i = 0; i < result.size(); i++) {
-            sb.append(String.format("%s. %s\n", i++, result.get(i).toString()));
+        for (int i = 0, c = 1; i < result.size(); i++, c++) {
+            sb.append(String.format("%s. %s\n", c, result.get(i).toString()));
         }
         return sb.toString();
     }

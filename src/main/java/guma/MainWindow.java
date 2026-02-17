@@ -37,7 +37,10 @@ public class MainWindow extends AnchorPane {
     public void setGuma(Guma g, Stage stage) {
         this.stage = stage;
         this.guma = g;
-        String greeting = "Eh Hello! I am Guma from Singapore. \nWhat you want sia?";
+        String greeting = "Eh Hello! I am Guma from Singapore. \nWhat you want sia?"
+                +
+                "\nhelp command if you dont know anything hor";
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getGumaDialog(greeting, gumaImage)
         );

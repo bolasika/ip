@@ -55,6 +55,7 @@ public class Storage {
      * @throws IOException If the file cannot be created or read.
      */
     private static ArrayList<Task> getTasksFromLocal(File f) throws IOException {
+        assert f != null : "File object should not be null";
         if (!f.exists()) {
             createParentFiles(f);
             return new ArrayList<Task>();

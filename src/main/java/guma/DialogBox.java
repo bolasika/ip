@@ -56,9 +56,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getGumaDialog(String text, Image img) {
+        boolean isErrorMessage = false;
+        if (text != null && text.startsWith(">>")) {
+            isErrorMessage = true;
+            text = text.split(">> ")[1];
+        }
         var db = new DialogBox(text, img);
         db.dialog.getStyleClass().add("guma-bubble");
-        if (text != null && text.startsWith(">>")) {
+        if (isErrorMessage) {
             db.dialog.getStyleClass().add("error-bubble");
         }
         db.flip();

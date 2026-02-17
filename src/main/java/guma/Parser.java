@@ -3,6 +3,7 @@ package guma;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 import guma.command.AddCommand;
@@ -16,6 +17,9 @@ import guma.command.ListCommand;
 import guma.command.ScheduleCommand;
 import guma.command.UndoCommand;
 import guma.exception.GumaException;
+import guma.exception.GumaInvalidCommand;
+import guma.exception.GumaInvalidDateTimeException;
+import guma.exception.GumaInvalidDateTimeRangeException;
 import guma.task.DeadlineTask;
 import guma.task.EventTask;
 import guma.task.ToDoTask;
@@ -39,15 +43,13 @@ public class Parser {
      * @param input The user input data that was stored in the Task
      * @return A normalized date-time string if matches the regex, else original input.
      */
-    public static LocalDateTime dateTimeChecker(String input) {
+    public static LocalDateTime dateTimeChecker(String input) throws GumaException {
         if (input.matches(REGEX_SLASH_DMY)) {
             return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("d/M/uuuu HHmm"));
         } else if (input.matches(REGEX_DASH_YMD)) {
             return LocalDateTime.parse(input, DateTimeFormatter.ofPattern("uuuu-MM-d HHmm"));
         } else {
-            throw new GumaException(">> You sure your date pattern got follow mine anot.\n"
-                    +
-                    "I only accept these 2 formats:\n1) dd/MM/yyyy HHmm\n2) yyyy-MM-dd HHmm");
+            throw GumaInvalidDateTimeException.invalidDateTimeFormat();
         }
     }
 
@@ -78,18 +80,18 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws GumaException {
         String action = fullCommand.split(" ")[0].toLowerCase();
-        String taskName;
+        fullCommand = toLowerCaseFirstWord(fullCommand);
         switch (action) {
         case "list":
             return new ListCommand();
         case "bye":
             return new ExitCommand();
         case "mark":
-            return new CompleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            return parseMarkCommand(fullCommand);
         case "unmark":
-            return new UndoCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            return parseUnmarkCommand(fullCommand);
         case "delete":
-            return new DeleteCommand(Integer.parseInt(fullCommand.split(" ")[1]));
+            return parseDeleteCommand(fullCommand);
         case "todo":
             return parseToDoCommand(fullCommand);
         case "deadline":
@@ -103,12 +105,48 @@ public class Parser {
         case "schedule":
             return parseScheduleCommand(fullCommand);
         default:
-            throw new GumaException(">> Wah lao, what you mean?\n"
-                    +
-                    "Run help command if you don't know lei...");
+            throw GumaInvalidCommand.unknownCommand();
         }
     }
 
+    private static String toLowerCaseFirstWord(String fullCommand) {
+        String[] fullCommandArr = fullCommand.split(" ");
+        fullCommandArr[0] = fullCommandArr[0].toLowerCase();
+        return String.join(" ", fullCommandArr);
+    }
+
+    private static UndoCommand parseUnmarkCommand(String fullCommand) {
+        try {
+            int index = Integer.parseInt(fullCommand.split(" ")[1]);
+            return new UndoCommand(index);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("unmark <task_index>");
+        } catch (Exception e) {
+            throw new GumaException(">> An unexpected error occurred while parsing the unmark command.");
+        }
+    }
+
+    private static CompleteCommand parseMarkCommand(String fullCommand) {
+        try {
+            int index = Integer.parseInt(fullCommand.split(" ")[1]);
+            return new CompleteCommand(index);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("mark <task_index>");
+        } catch (Exception e) {
+            throw new GumaException(">> An unexpected error occurred while parsing the mark command.");
+        }
+    }
+
+    private static DeleteCommand parseDeleteCommand(String fullCommand) {
+        try {
+            int index = Integer.parseInt(fullCommand.split(" ")[1]);
+            return new DeleteCommand(index);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("delete <task_index>");
+        } catch (Exception e) {
+            throw new GumaException(">> An unexpected error occurred while parsing the delete command.");
+        }
+    }
     /**
      * Parses a {@code todo} command for input validation
      * @param fullCommand The full input string from the user.
@@ -118,8 +156,10 @@ public class Parser {
     private static AddCommand parseToDoCommand(String fullCommand) {
         try {
             return new AddCommand(new ToDoTask(fullCommand.split("todo ")[1]));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("todo <taskname>");
         } catch (Exception e) {
-            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for todo is: todo <taskname>");
+            throw new GumaException(">> An unexpected error occurred while parsing the todo command.");
         }
     }
 
@@ -130,15 +170,18 @@ public class Parser {
      * @throws GumaException If the command format is invalid.
      */
     private static AddCommand parseDeadlineCommand(String fullCommand) {
-        String taskName;
         try {
-            taskName = fullCommand.split("deadline ")[1].split(" /by")[0];
+            String taskName = fullCommand.split("deadline ")[1].split(" /by")[0];
             String description = fullCommand.split("/by ")[1];
             return new AddCommand(new DeadlineTask(taskName, Parser.dateTimeChecker(description)));
-        } catch (Exception e) {
-            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for deadline is: \ndeadline "
+        } catch (GumaInvalidDateTimeException e) {
+            throw GumaInvalidDateTimeException.invalidDateTimeFormat();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("deadline <taskname> /by <DateTime>\n"
                     +
-                    "<taskname> /by <DateTime>\n<DateTime> got format one ah: dd/MM/yyyy HHmm or yyyy-MM-dd HHmm");
+                    "<DateTime> got format one ah: dd/MM/yyyy HHmm or yyyy-MM-dd HHmm");
+        } catch (Exception e) {
+            throw new GumaException(">> An unexpected error occurred while parsing the deadline command.");
         }
     }
 
@@ -153,14 +196,22 @@ public class Parser {
             String taskName = fullCommand.split("event ")[1].split(" /from")[0];
             String fromTime = fullCommand.split(" /from ")[1].split(" /to ")[0];
             String toTime = fullCommand.split("/to ")[1];
-            return new AddCommand(new EventTask(taskName, Parser.dateTimeChecker(fromTime),
-                    Parser.dateTimeChecker(toTime)));
-        } catch (Exception e) {
-            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for event is: "
-                    +
-                    "\nevent <taskname> /from <DateTime> /to <DateTime>\n"
+            LocalDateTime fromDateTime = Parser.dateTimeChecker(fromTime);
+            LocalDateTime toDateTime = Parser.dateTimeChecker(toTime);
+            if (toDateTime.isBefore(fromDateTime)) {
+                throw GumaInvalidDateTimeRangeException.endBeforeStart();
+            }
+            return new AddCommand(new EventTask(taskName, fromDateTime, toDateTime));
+        } catch (GumaInvalidDateTimeException e) {
+            throw GumaInvalidDateTimeException.invalidDateTimeFormat();
+        } catch (GumaInvalidDateTimeRangeException e) {
+            throw GumaInvalidDateTimeRangeException.endBeforeStart();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("event <taskname> /from <DateTime> /to <DateTime>\n"
                     +
                     "<DateTime> got format one ah: dd/MM/yyyy HHmm or yyyy-MM-dd HHmm");
+        } catch (Exception e) {
+            throw new GumaException(">> An unexpected error occurred while parsing the event command.");
         }
     }
 
@@ -174,8 +225,10 @@ public class Parser {
         try {
             String taskName = fullCommand.split("find ")[1];
             return new FindCommand(taskName);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("find <keyword>");
         } catch (Exception e) {
-            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for find is: \nfind <keyword>");
+            throw new GumaException(">> An unexpected error occurred while parsing the find command.");
         }
     }
 
@@ -184,10 +237,12 @@ public class Parser {
         try {
             String date = fullCommand.split("/on ")[1];
             return new ScheduleCommand(LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw GumaInvalidCommand.invalidSyntax("schedule /on dd/MM/yyyy");
+        } catch (DateTimeParseException e) {
+            throw GumaInvalidDateTimeException.invalidDateFormat();
         } catch (Exception e) {
-            throw new GumaException(">> You sure you type correctly ah?\nThe syntax for schedule is: \n"
-                    +
-                    "schedule /on dd/MM/yyyy");
+            throw new GumaException(">> An unexpected error occurred while parsing the schedule command.");
         }
     }
 

@@ -13,8 +13,9 @@ public enum CommandList {
     MARK("mark <index>", "Marks a task as done"),
     UNMARK("unmark <index>", "Marks a task as not done"),
     DELETE("delete <index>", "Deletes a task"),
-    BYE("bye", "Exits the program"),
-    SCHEDULE("schedule /on DD/MM/YYYY", "Lists tasks that are either on or within the date itself");
+    SCHEDULE("schedule /on DD/MM/YYYY", "Lists tasks that are either on or within the date itself"),
+    BYE("bye", "Exits the program");
+
 
     private final String syntax;
     private final String description;
@@ -26,6 +27,6 @@ public enum CommandList {
 
     @Override
     public String toString() {
-        return String.format("- %s : %s", this.syntax, this.description);
+        return String.format("`%s`: %s\n", this.syntax, this.description);
     }
 }

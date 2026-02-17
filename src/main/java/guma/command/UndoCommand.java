@@ -3,6 +3,7 @@ package guma.command;
 import guma.Storage;
 import guma.Ui;
 import guma.exception.GumaException;
+import guma.exception.GumaInvalidIndex;
 import guma.task.TaskList;
 
 /**
@@ -35,6 +36,8 @@ public class UndoCommand extends Command {
             assert (this.taskIndex <= tasks.getSize() && this.taskIndex > 0)
                     : "Select item should be within the task list";
             return ui.getUndo(tasks.undoTask(this.taskIndex));
+        } catch (AssertionError | IndexOutOfBoundsException e) {
+            throw GumaInvalidIndex.invalidIndex();
         } catch (Exception e) {
             throw new GumaException(">> weird sia, cannot unmark this task.\n"
                     +
