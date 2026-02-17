@@ -34,6 +34,7 @@ public class Main extends Application {
         stage.setHeight(700.0);
         stage.setMinWidth(500.0);
         stage.setMinHeight(600.0);
+        stage.setTitle("Singaporean - Guma");
         return stage;
     }
 
