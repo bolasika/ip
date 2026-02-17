@@ -1,8 +1,8 @@
 package guma.task;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import guma.Parser;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a task that occurs during a specific time period.
@@ -47,5 +47,10 @@ public class EventTask extends Task {
     public String toFileString() {
         return String.format("E_%s_%s_%s_%s", getStatus() ? "1" : "0",
                 getTaskName(), Parser.dateToSave(this.startTime), Parser.dateToSave(this.endTime));
+    }
+
+    @Override
+    public boolean insideSchedule(LocalDate queryDate) {
+        return !queryDate.isBefore(this.startTime.toLocalDate()) && !queryDate.isAfter(this.endTime.toLocalDate());
     }
 }

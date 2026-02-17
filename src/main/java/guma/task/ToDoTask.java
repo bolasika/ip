@@ -1,5 +1,8 @@
 package guma.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  * Represents a basic task without any specific dates or times.
  *
@@ -33,5 +36,10 @@ public class ToDoTask extends Task {
     @Override
     public String toFileString() {
         return "T_" + (getStatus() ? "1" : "0") + "_" + getTaskName();
+    }
+
+    @Override
+    public boolean insideSchedule(LocalDate queryDate) {
+        return false;
     }
 }

@@ -13,7 +13,8 @@ public enum CommandList {
     MARK("mark <index>", "Marks a task as done"),
     UNMARK("unmark <index>", "Marks a task as not done"),
     DELETE("delete <index>", "Deletes a task"),
-    BYE("bye", "Exits the program");
+    BYE("bye", "Exits the program"),
+    SCHEDULE("schedule /on DD/MM/YYYY", "Lists tasks that are either on or within the date itself");
 
     private final String syntax;
     private final String description;

@@ -1,4 +1,5 @@
 package guma.task;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import guma.Parser;
@@ -43,5 +44,10 @@ public class DeadlineTask extends Task {
     public String toFileString() {
         return String.format("D_%s_%s_%s", getStatus() ? "1" : "0",
                 getTaskName(), Parser.dateToSave(this.date));
+    }
+
+    @Override
+    public boolean insideSchedule(LocalDate queryDate) {
+        return queryDate.equals(this.date.toLocalDate());
     }
 }

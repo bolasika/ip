@@ -1,7 +1,11 @@
 package guma;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import guma.command.CommandList;
+import guma.task.Task;
 import guma.task.TaskList;
 
 
@@ -52,7 +56,7 @@ public class Ui {
      * @param tasks     The task list containing tasks to be displayed.
      */
     public String getListing(TaskList tasks) {
-        return String.format("\n\tHere are the tasks in your list:\n%s",
+        return String.format("Here are the tasks in your list:\n%s",
                 tasks.getTaskListing());
     }
 
@@ -126,6 +130,18 @@ public class Ui {
             sb.append(e.toString() + "\n");
         }
         sb.append("========================\nTAKE NOTE: <Date> format are:\n1. d/M/uuuu HHmm\n 2. uuuu-MM-d HHmm\n========================");
+        return sb.toString();
+    }
+
+    public String getScheduleListing(TaskList tasks, LocalDate target) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Task> result = tasks.getScheduleListing(target);
+        if (result.isEmpty()) {
+            return String.format("No result found that's schedule on: %s", target);
+        }
+        for (int i = 0; i < result.size(); i++) {
+            sb.append(String.format("%s. %s\n", i++, result.get(i).toString()));
+        }
         return sb.toString();
     }
 }

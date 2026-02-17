@@ -1,5 +1,8 @@
 package guma.task;
 
+import java.time.LocalDate;
+
+
 /**
  * Providing an abstraction for all classes in the Guma application.
  */
@@ -70,4 +73,12 @@ public abstract class Task {
      * @return A single-line string representation suitable for file storage
      */
     public abstract String toFileString();
+
+    /**
+     * Returns a boolean after checking if the parameter date clash with the Task's dates.
+     * @param date The date-time to check against this task's schedule.
+     * @return {@code true} if the given date-time falls within this task's schedule, else {@code false}.
+     */
+    public abstract boolean insideSchedule(LocalDate date);
+
 }
