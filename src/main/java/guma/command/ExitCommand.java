@@ -23,7 +23,7 @@ public class ExitCommand extends Command {
             tasks.saveTo(storage);
             return ui.getFarewell();
         } catch (Exception e) {
-            throw new GumaException(">> ERR: ExitCommand::Error in saving files!");
+            throw new GumaException(">> Weird sia, cannot save your tasks.\nYou sure you type correctly ah?");
         }
     }
 

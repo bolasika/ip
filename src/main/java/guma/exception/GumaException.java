@@ -7,7 +7,7 @@ public class GumaException extends RuntimeException {
     /**
      * Initializes the exception with a message.
      *
-     * @par|am msg The error message.
+     * @param msg The error message.
      */
     public GumaException(String msg) {
         super(msg);

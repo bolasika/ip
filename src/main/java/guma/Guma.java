@@ -28,7 +28,7 @@ public class Guma {
     }
 
     /**
-     * Runs the chatbot session.
+     * Runs the chatbot session (in command-line mode).
      * Prints the greeting, reads and executes user commands, and ends when "bye" is issued.
      */
     public void run() {
@@ -42,7 +42,7 @@ public class Guma {
     }
 
     /**
-     * Reads one command, executes it, and returns whether the session should exit.
+     * Reads one command, executes it, and returns whether the session should exit. (in command-line mode)
      * @param isExit Current exit flag before processing this command.
      * @return {@code true} if the last command requests exit, otherwise {@code false}.
      */

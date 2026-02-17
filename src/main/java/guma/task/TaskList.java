@@ -1,7 +1,6 @@
 package guma.task;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import guma.Storage;
@@ -10,11 +9,10 @@ import guma.Storage;
  * Provides methods to add, delete, complete, and undo tasks.
  */
 public class TaskList {
-    /** Array to store the Task */
-    private ArrayList<Task> tasks;
-
     /** Separator line for formatting chatbot */
     private static final String SEPARATOR = "\t____________________________________________________________";
+    /** Array to store the Task */
+    private ArrayList<Task> tasks;
 
     /**
      * Initializes the task list with existing tasks.

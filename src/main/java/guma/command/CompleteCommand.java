@@ -36,7 +36,9 @@ public class CompleteCommand extends Command {
                     : "Select item should be within the task list";
             return ui.getCompletion(tasks.completeTask(this.taskIndex));
         } catch (Exception e) {
-            throw new GumaException(">> ERR: CompleteCommand::Unable to mark task as complete");
+            throw new GumaException(">> Weird sia, cannot mark this task.\n"
+                    +
+                    "You sure you type correctly ah?\nLike dis: mark <index>");
         }
     }
 }

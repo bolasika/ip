@@ -1,6 +1,5 @@
 package guma;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,14 +14,14 @@ import guma.task.TaskList;
  * Provides methods to show messages and read user input.
  */
 public class Ui {
-    /** Separator line for formatting chatbot */
+    /** Separator line for formatting chatbot (for visual in command-line mode) */
     private static final String SEPARATOR = "\t____________________________________________________________\n";
 
     /** Scanner function to read the user input */
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Show Separator line
+     * Show Separator line (for visual in command-line mode)
      */
     public void showLine() {
         System.out.print(SEPARATOR);
@@ -35,8 +34,9 @@ public class Ui {
     public String readCommand() {
         return scanner.nextLine();
     }
+
     /**
-     * A greeting message displayed when the chatbot starts
+     * A greeting message displayed when the chatbot starts (in command-line mode)
      *
      */
     public void getGreeting() {
@@ -44,7 +44,7 @@ public class Ui {
     }
 
     /**
-     * A farewell message displayed when the chatbot ends
+     * A farewell message displayed when the chatbot ends (in command-line mode)
      *
      */
     public String getFarewell() {
@@ -56,7 +56,11 @@ public class Ui {
      * @param tasks     The task list containing tasks to be displayed.
      */
     public String getListing(TaskList tasks) {
-        return String.format("Here are the tasks in your list:\n%s",
+        String result = tasks.getTaskListing();
+        if (result.equals("")) {
+            return "SHIOK! NO TASK!";
+        }
+        return String.format("Wah Sian, tasks again... Here ur tasks: \n%s",
                 tasks.getTaskListing());
     }
 
@@ -65,7 +69,7 @@ public class Ui {
      * @param taskName  The description of the completed task.
      */
     public String getCompletion(String taskName) {
-        return String.format("\tNice! I've marked this task as done:\n\t%s", taskName);
+        return String.format("SHIOK! This task finish liao:\n%s", taskName);
     }
 
     /**
@@ -73,7 +77,7 @@ public class Ui {
      * @param taskName  The description of the task.
      */
     public String getUndo(String taskName) {
-        return String.format("\tOk, I've marked this task as not done yet:\n\t%s", taskName);
+        return String.format("Wah lao... I cannot believe you UNDO this task:\n%s", taskName);
     }
 
     /**
@@ -82,7 +86,7 @@ public class Ui {
      * @param size      The current number of tasks in the list.
      */
     public String getDeletion(String taskName, int size) {
-        return String.format("\tNoted, I've removed this task:\n\t %s\n\t Now you have %s tasks in the list",
+        return String.format("Ok delete this task liao:\n %s\n Now you have %s tasks in the list.",
                 taskName, size);
     }
 
@@ -92,7 +96,7 @@ public class Ui {
      * @param size      The current number of tasks in the list.
      */
     public String getAdd(String taskName, int size) {
-        return String.format("\tGot it. I've added this task:\n\t %s\n\tNow you have %s tasks in the list",
+        return String.format("\tJia lat, got one more task added: \n%s\nNow you have %s tasks in the list liao",
                 taskName, size);
     }
 
@@ -105,7 +109,7 @@ public class Ui {
     }
 
     /**
-     * Notifies the user that the command was not recognized.
+     * Notifies the user that the command was not recognized. (in command-line mode)
      */
     public void getUnknown() {
         System.out.println(SEPARATOR + "\n\t Sorry, I do not recognize the command :-(\n" + SEPARATOR);
@@ -117,9 +121,9 @@ public class Ui {
      */
     public String getFindListing(String message) {
         if (message.isEmpty()) {
-            return "\t Unable to find any matching tasks in your list.";
+            return "Cannot find la your task. You sure you type correctly ah?";
         } else {
-            return String.format("\n\tHere are the matching tasks in your list:\n%s",
+            return String.format("\nAll these are your matching task for:\n%s",
                     message);
         }
     }
@@ -129,7 +133,11 @@ public class Ui {
         for (CommandList e : CommandList.values()) {
             sb.append(e.toString() + "\n");
         }
-        sb.append("========================\nTAKE NOTE: <Date> format are:\n1. d/M/uuuu HHmm\n 2. uuuu-MM-d HHmm\n========================");
+        sb.append("========================\n"
+                +
+                "Remember my <DateTime> format ah:\n1. d/M/uuuu HHmm\n 2. uuuu-MM-d HHmm\n"
+                +
+                "========================");
         return sb.toString();
     }
 
@@ -137,7 +145,7 @@ public class Ui {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> result = tasks.getScheduleListing(target);
         if (result.isEmpty()) {
-            return String.format("No result found that's schedule on: %s", target);
+            return String.format("SHIOK! Nothing is schedule on: %s\nCAN LEPAK!", target);
         }
         for (int i = 0; i < result.size(); i++) {
             sb.append(String.format("%s. %s\n", i++, result.get(i).toString()));

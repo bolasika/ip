@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
     public void setGuma(Guma g, Stage stage) {
         this.stage = stage;
         this.guma = g;
-        String greeting = "Hello! I'm Guma\nWhat can I do for you?";
+        String greeting = "Eh Hello! I am Guma from Singapore. \nWhat you want sia?";
         dialogContainer.getChildren().addAll(
                 DialogBox.getGumaDialog(greeting, gumaImage)
         );
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Guma's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * the dialog container. Clears the user input after processing. (in GUI mode)
      */
     @FXML
     private void handleUserInput() {

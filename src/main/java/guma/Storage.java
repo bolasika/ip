@@ -111,14 +111,14 @@ public class Storage {
             tasks.add(t);
             break;
         case "D":
-            t = new DeadlineTask(b[2], Parser.dateChecker(b[3]));
+            t = new DeadlineTask(b[2], Parser.dateTimeChecker(b[3]));
             if ("1".equals(b[1])) {
                 t.complete();
             }
             tasks.add(t);
             break;
         case "E":
-            t = new EventTask(b[2], Parser.dateChecker(b[3]), Parser.dateChecker(b[4]));
+            t = new EventTask(b[2], Parser.dateTimeChecker(b[3]), Parser.dateTimeChecker(b[4]));
             if ("1".equals(b[1])) {
                 t.complete();
             }

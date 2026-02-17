@@ -7,8 +7,8 @@ package guma.command;
 public enum CommandList {
     HELP("help", "Shows all commands"),
     TODO("todo <description>", "Adds a todo task"),
-    DEADLINE("deadline <description> /by <Date>", "Adds a deadline task"),
-    EVENT("event <description> /from <Date> /to <Date>", "Adds an event task"),
+    DEADLINE("deadline <description> /by <DateTime>", "Adds a deadline task"),
+    EVENT("event <description> /from <DateTime> /to <DateTime>", "Adds an event task"),
     LIST("list", "Lists all tasks with index"),
     MARK("mark <index>", "Marks a task as done"),
     UNMARK("unmark <index>", "Marks a task as not done"),
