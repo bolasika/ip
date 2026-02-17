@@ -1,18 +1,11 @@
 package guma;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import guma.command.AddCommand;
-import guma.command.Command;
-import guma.command.CompleteCommand;
-import guma.command.DeleteCommand;
-import guma.command.ExitCommand;
-import guma.command.FindCommand;
-import guma.command.HelpCommand;
-import guma.command.ListCommand;
-import guma.command.UndoCommand;
+import guma.command.*;
 import guma.exception.GumaException;
 import guma.task.DeadlineTask;
 import guma.task.EventTask;
@@ -96,6 +89,8 @@ public class Parser {
             return parseFindCommand(fullCommand);
         case "help":
             return new HelpCommand();
+        case "schedule":
+            return parseScheduleCommand(fullCommand);
         default:
             throw new GumaException("\n\t Sorry, I do not recognize the command :-(\n");
         }
@@ -161,6 +156,16 @@ public class Parser {
             return new FindCommand(taskName);
         } catch (Exception e) {
             throw new GumaException(">> ERR: Ensure your Syntax: find <taskname>");
+        }
+    }
+
+
+    private static ScheduleCommand parseScheduleCommand(String fullCommand) {
+        try {
+            String date = fullCommand.split("/on ")[1];
+            return new ScheduleCommand(LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } catch (Exception e) {
+            throw new GumaException(">> ERR: Ensure your Syntax: schedule /on dd/MM/yyyy");
         }
     }
 

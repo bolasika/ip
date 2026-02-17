@@ -1,5 +1,7 @@
 package guma.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import guma.Storage;
@@ -85,7 +87,7 @@ public class TaskList {
     public String getTaskListing() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(String.format("\t%s. %s\n", i + 1, tasks.get(i)));
+            sb.append(String.format("%s. %s\n", i + 1, tasks.get(i)));
         }
         return sb.toString();
     }
@@ -115,6 +117,17 @@ public class TaskList {
             }
         }
         return sb.toString();
+    }
+
+    public ArrayList<Task> getScheduleListing(LocalDate target) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Task> scheduledTasks = new ArrayList<>();
+        for (Task eachTask : this.tasks) {
+            if (eachTask.insideSchedule(target)) {
+                scheduledTasks.add(eachTask);
+            }
+        }
+        return scheduledTasks;
     }
 
 }
