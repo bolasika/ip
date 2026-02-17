@@ -44,7 +44,7 @@ In `src/main/resources/css/dialog-box.css`:
 }
 ```
 
-In `src/java/guma/DialogBox.java`:
+In `src/main/java/guma/DialogBox.java`:
 ```java
 public static DialogBox getUserDialog(String text, Image img) {
     var db = new DialogBox(text, img);
@@ -57,6 +57,34 @@ public static DialogBox getGumaDialog(String text, Image img) {
     db.dialog.getStyleClass().add("guma-bubble");
     db.flip();
     return db;
+}
+```
+
+2. Make the GUI to highlight errors by making the message containing the errors to be RED.
+
+**Pre-requisites:** Making all error messages to follow certain format, first 2 characters being `>>`
+
+**Code Segments edited by the Codex**
+
+In `src/main/java/guma/DialogBox.java`:
+```java
+ public static DialogBox getGumaDialog(String text, Image img) {
+     var db = new DialogBox(text, img);
+     db.dialog.getStyleClass().add("guma-bubble");
+     if (text != null && text.startsWith(">>")) {
+         db.dialog.getStyleClass().add("error-bubble");
+     }
+     db.flip();
+     return db;
+ }
+```
+
+In `src/main/resources/css/dialog-box.css`: 
+```css
+.error-bubble {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #7f1d1d;
+    -fx-border-color: #fca5a5;
 }
 ```
 

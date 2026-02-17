@@ -76,15 +76,11 @@ public class Guma {
      * @return The chatbot response text.
      */
     public String getResponse(String input) {
-        String output;
         try {
             Command c = Parser.parse(input);
-            output = c.execute(tasks, ui, storage);
+            return c.execute(tasks, ui, storage);
         } catch (GumaException e) {
-            ui.showError(e.getMessage());
-            output = "Sorry, I do not recognize the command...";
+            return e.getMessage();
         }
-
-        return output;
     }
 }
