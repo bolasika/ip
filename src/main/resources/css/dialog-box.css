@@ -1,19 +1,33 @@
-.label {
-    -fx-background-color: linear-gradient(to bottom right, #00ffbf, #00ddff);
-    -fx-border-color: #d55e00 #009e73 #cc79a7 #0072b2;
-    -fx-border-width: 2px;
-    -fx-background-radius: 1em 1em 0 1em;
-    -fx-border-radius: 1em 1em 0 1em;
-    -fx-padding: 6px;
-    -fx-border-insets: 0px 7px 0px 7px;
-    -fx-background-insets: 0px 7px 0px 7px;
-    -fx-font-size: 10px;
+.dialog-bubble {
+    -fx-padding: 8px 10px 8px 10px;
+    -fx-font-size: 12px;
+    -fx-max-width: 280px;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-border-width: 1px;
+    -fx-wrap-text: true;
 }
 
+.user-bubble {
+    -fx-background-color: linear-gradient(to bottom right, #b6f7b1, #6ee7b7);
+    -fx-text-fill: #114b30;
+    -fx-border-color: #54b76a;
+    -fx-background-radius: 14px 14px 0 14px;
+    -fx-border-radius: 14px 14px 0 14px;
+}
 
-.reply-label {
-    -fx-background-radius: 1em 1em 1em 0;
-    -fx-border-radius: 1em 1em 1em 0;
+.guma-bubble {
+    -fx-background-color: #e5e7eb;
+    -fx-text-fill: #1f2937;
+    -fx-border-color: #cbd5e1;
+    -fx-background-radius: 14px 14px 14px 0;
+    -fx-border-radius: 14px 14px 14px 0;
+}
+
+.error-bubble {
+    -fx-background-color: #fee2e2;
+    -fx-text-fill: #7f1d1d;
+    -fx-border-color: #fca5a5;
 }
 
 #displayPicture {
