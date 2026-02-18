@@ -158,8 +158,8 @@ Advanced user are welcome to update data directly by editing that data file.
 > Changing your data file could make the format invalid.
 
 ### FAQ
-Q: How do I transfer my data to another Computer?
-A: Install the app in the other computer and overwrite the empty data file it
+**Q:** How do I transfer my data to another Computer?<br>
+**A:** Install the app in the other computer and overwrite the empty data file it
 creates with the file that contains the data of your previous Guma home folder.
 
 ### Command Summary
