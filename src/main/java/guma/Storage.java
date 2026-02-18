@@ -19,16 +19,7 @@ import guma.task.ToDoTask;
  */
 public class Storage {
     /** The path to the file where tasks are stored. */
-    private String filePath;
-
-    /**
-     * Constructor for Storage:
-     * Initializes the storage with the specified file path.
-     * @param filePath Path to the data file.
-     */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-    }
+    private static final String FILEPATH = "./data/guma.txt";
 
     /**
      * Loads tasks from the given file path and return them as ArrayList
@@ -36,7 +27,7 @@ public class Storage {
      */
     public ArrayList<Task> loadTask() {
         try {
-            File f = new File(this.filePath);
+            File f = new File(FILEPATH);
             return getTasksFromLocal(f);
         } catch (FileNotFoundException e) {
             System.out.println("Unable in reading file");
@@ -154,7 +145,7 @@ public class Storage {
      */
     private boolean savingTasksToLocal(ArrayList<Task> tasks) throws IOException {
         StringBuilder sb = new StringBuilder();
-        FileWriter fw = new FileWriter(this.filePath);
+        FileWriter fw = new FileWriter(FILEPATH);
         tasks.stream()
              .forEach(eachTask -> sb.append(String.format("%s\n", eachTask.toFileString())));
         fw.write(sb.toString());

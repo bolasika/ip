@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Guma using FXML.
  */
 public class Main extends Application {
-    private Guma guma = new Guma("src/main/data/guma.txt");
+    private Guma guma = new Guma();
 
     @Override
     public void start(Stage stage) {

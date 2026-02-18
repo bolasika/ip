@@ -18,12 +18,11 @@ public class Guma {
     private Ui ui;
 
     /**
-     * Constructs a Guma chatbot instance with the given storage file path.
-     * @param filePath Path to the data file used for loading and saving tasks.
+     * Constructs a Guma chatbot instance
      */
-    public Guma(String filePath) {
+    public Guma() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         this.tasks = new TaskList(storage.loadTask());
     }
 
@@ -66,7 +65,7 @@ public class Guma {
      * @param args Command-line arguments (not used).
      */
     public static void main(String... args) {
-        Guma bot = new Guma("src/main/data/guma.txt");
+        Guma bot = new Guma();
         bot.run();
     }
 
