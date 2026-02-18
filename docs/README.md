@@ -154,7 +154,7 @@ Tasks data are saved when you exit the application as a text file
 `[JAR file location]/data/gumaStorage.txt`. 
 Advanced user are welcome to update data directly by editing that data file.
 
-[!WARNING]
+> [!WARNING]
 > Changing your data file could make the format invalid.
 
 ### FAQ
