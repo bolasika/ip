@@ -57,7 +57,7 @@ e.g. typing `help` and pressing Enter will execute help command.
 ## Features
 
 
-> [!NOTE] 
+ 
 > All commands are **_case-insensitive_**. <br> Do take note of the formats
 > **_\<DateTime\> formats accepted:_**
 > - `dd/MM/yyyy HHmm` (e.g., `28/02/2026 1830`)
@@ -154,7 +154,6 @@ Tasks data are saved when you exit the application as a text file
 `[JAR file location]/data/gumaStorage.txt`. 
 Advanced user are welcome to update data directly by editing that data file.
 
-> [!WARNING]
 > Changing your data file could make the format invalid.
 
 ### FAQ
@@ -163,19 +162,19 @@ Advanced user are welcome to update data directly by editing that data file.
 creates with the file that contains the data of your previous Guma home folder.
 
 ### Command Summary
-| Action | Format, Example                                                |
-|--------|----------------------------------------------------------------|
-| help   | `help`                                                         |
-| list   | `list`                                                         |
-| todo   | `todo <description>`<br>e.g., `todo change mouse pad`          |
-| deadline | `deadline <description> /by <DateTime>`<br>e.g., `deadline submit report /by 28/02/2026 2359` |
-| event  | `event <description> /from <DateTime> /to <DateTime>`<br>e.g., `event cs2103 lab /from 2026-02-28 1400 /to 2026-02-28 1600` |
-| mark   | `mark <index>`<br>e.g., `mark 2`                               |
-| unmark | `unmark <index>`<br>e.g., `unmark 2`                           |
-| delete | `delete <index>`<br>e.g., `delete 3`                           |
-| find   | `find <keyword>`<br>e.g., `find report`                        |
-| schedule | `schedule /on dd/MM/yyyy`<br>e.g., `schedule /on 28/02/2026` |
-| bye    | `bye`                                                          |
+| Action   | Format                                                | Example                                                      |
+|----------|-------------------------------------------------------|--------------------------------------------------------------|
+| help     | `help`                                                | `help`                                                       | 
+| list     | `list`                                                | `list`                                                       |
+| todo     | `todo <description>`                                  | `todo change mouse pad`                                      |
+| deadline | `deadline <description> /by <DateTime>`               | `deadline submit report /by 28/02/2026 2359`                 |
+| event    | `event <description> /from <DateTime> /to <DateTime>` | `event CS2103 lab /from 2026-02-28 1400 /to 2026-02-28 1600` |
+| mark     | `mark <index>`                                        | `mark 2`                                                     |
+| unmark   | `unmark <index>`                                      | `unmark 2`                                                   |
+| delete   | `delete <index>`                                      | `delete 3`                                                   |
+| find     | `find <keyword>`                                      | `find report`                                                |
+| schedule | `schedule /on dd/MM/yyyy`                             | `schedule /on 28/02/2026`                                    |
+| bye      | `bye`                                                 | `bye`                                                        |
 
 ## Acknowledgements
 1. Documentation is inspired by [AddressBook Level-3](https://se-education.org/addressbook-level3/UserGuide.html)
