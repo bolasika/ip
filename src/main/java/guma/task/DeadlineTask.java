@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import guma.Parser;
 
-
-
 /**
  * Represents a task with a deadline.
  */
@@ -14,10 +12,10 @@ public class DeadlineTask extends Task {
     private LocalDateTime date;
 
     /**
-     * Constructor of Deadline Task
+     * Constructs a deadline task.
      *
-     * @param taskName    name of the task
-     * @param date The specific date / time that is due on
+     * @param taskName Name of the task.
+     * @param date     The date/time the task is due.
      */
     public DeadlineTask(String taskName, LocalDateTime date) {
         super(taskName);
@@ -25,9 +23,9 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * String representation of the Deadline Task
+     * Returns the string representation of the deadline task.
      *
-     * @return A string representation of Deadline Task
+     * @return A string representation of the deadline task.
      */
     @Override
     public String toString() {
@@ -36,9 +34,9 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Convert DEADLINE task into a single-line format for saving to disk
+     * Converts the deadline task into a single-line format for saving to disk.
      *
-     * @return A single-line string encoding this DEADLINE task
+     * @return A single-line string encoding this deadline task.
      */
     @Override
     public String toFileString() {
@@ -46,6 +44,12 @@ public class DeadlineTask extends Task {
                 getTaskName(), Parser.dateToSave(this.date));
     }
 
+    /**
+     * Returns true when the query date matches the deadline date.
+     *
+     * @param queryDate The date to check against.
+     * @return {@code true} if the deadline is on the query date, else {@code false}.
+     */
     @Override
     public boolean insideSchedule(LocalDate queryDate) {
         return queryDate.equals(this.date.toLocalDate());

@@ -4,7 +4,8 @@ import java.time.LocalDate;
 
 
 /**
- * Providing an abstraction for all classes in the Guma application.
+ * Represents a generic task with a name and completion status.
+ * Concrete subclasses provide scheduling details and storage formats.
  */
 public abstract class Task {
     /** Name of the Task */
@@ -14,9 +15,9 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Constructor for the task
+     * Constructs a task with the given name.
      *
-     * @param taskName Name of the task
+     * @param taskName Name of the task.
      */
     public Task(String taskName) {
         this.taskName = taskName;
@@ -24,14 +25,14 @@ public abstract class Task {
     }
 
     /**
-     * Mark the task as complete
+     * Marks the task as complete.
      */
     public void complete() {
         this.isDone = true;
     }
 
     /**
-     * Mark the task as incomplete
+     * Marks the task as incomplete.
      */
     public void undo() {
         this.isDone = false;
@@ -40,7 +41,7 @@ public abstract class Task {
     /**
      * Returns whether the task is marked as complete.
      *
-     * @return True if the task is completed, false otherwise
+     * @return True if the task is completed, false otherwise.
      */
     public boolean getStatus() {
         return this.isDone;
@@ -49,16 +50,16 @@ public abstract class Task {
     /**
      * Returns the name of the task.
      *
-     * @return The task name
+     * @return The task name.
      */
     public String getTaskName() {
         return this.taskName;
     }
 
     /**
-     * String representation of the task
+     * Returns the string representation of the task.
      *
-     * @return A string representation of the Task
+     * @return A string representation of the task.
      */
     @Override
     public String toString() {
@@ -67,17 +68,17 @@ public abstract class Task {
     }
 
     /**
-     * Returns a single-line string representation of this task for saving to the
-     * data file.
+     * Returns a single-line string representation of this task for saving to the data file.
      *
-     * @return A single-line string representation suitable for file storage
+     * @return A single-line string representation suitable for file storage.
      */
     public abstract String toFileString();
 
     /**
-     * Returns a boolean after checking if the parameter date clash with the Task's dates.
-     * @param date The date-time to check against this task's schedule.
-     * @return {@code true} if the given date-time falls within this task's schedule, else {@code false}.
+     * Checks whether the given date is within this task's schedule.
+     *
+     * @param date The date to check against this task's schedule.
+     * @return {@code true} if the date falls within this task's schedule, else {@code false}.
      */
     public abstract boolean insideSchedule(LocalDate date);
 

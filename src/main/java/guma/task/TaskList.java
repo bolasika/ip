@@ -26,10 +26,10 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as complete
+     * Marks a task as complete.
      *
-     * @param idx The index that the Task is located in Tasklist
-     * @return A string representation of the task that was marked completed
+     * @param idx The 1-based index of the task in the task list.
+     * @return A string representation of the task that was marked completed.
      */
     public String completeTask(int idx) {
         this.tasks.get(idx - 1).complete();
@@ -37,10 +37,10 @@ public class TaskList {
     }
 
     /**
-     * Mark a task as incomplete
+     * Marks a task as incomplete.
      *
-     * @param idx The index that the Task is located in Tasklist
-     * @return A string representation to inform that the task has been undo
+     * @param idx The 1-based index of the task in the task list.
+     * @return A string representation to confirm the task was unmarked.
      */
     public String undoTask(int idx) {
         this.tasks.get(idx - 1).undo();
@@ -48,10 +48,10 @@ public class TaskList {
     }
 
     /**
-     * Delete a task in the tasklist
+     * Deletes a task from the task list.
      *
-     * @param idx The idx of the Task that should be deleted in the tasklist
-     * @return A string representation to inform user that the task has been removed
+     * @param idx The 1-based index of the task to delete.
+     * @return A string representation of the deleted task.
      */
     public String deleteTask(int idx) {
         String taskToRemove = this.tasks.get(idx - 1).toString();
@@ -60,19 +60,19 @@ public class TaskList {
     }
 
     /**
-     * Return the size of the ArrayList tasks
+     * Returns the size of the task list.
      *
-     * @return an Integer representing the size of the ArrayList Tasks
+     * @return The number of tasks in the list.
      */
     public int getSize() {
         return this.tasks.size();
     }
 
     /**
-     * Append tasks into tasklist then
+     * Adds a task to the task list.
      *
-     * @param task Task to be added into the ArrayList task
-     * @return A string representation to show that the task has been added
+     * @param task Task to be added into the list.
+     * @return A string representation of the added task.
      */
     public String addTask(Task task) {
         tasks.add(task);
@@ -80,9 +80,9 @@ public class TaskList {
     }
 
     /**
-     * Output a formatted list of task stored in ArrayList tasks
+     * Returns a formatted list of all tasks.
      *
-     * @return A string representation of the tasks
+     * @return A string representation of the tasks.
      */
     public String getTaskListing() {
         StringBuilder sb = new StringBuilder();
@@ -106,10 +106,10 @@ public class TaskList {
     }
 
     /**
-     * Find and return the formatted list of tasks that contains the user input
+     * Finds and returns a formatted list of tasks that contain the given keyword.
      *
-     * @param taskName  The keyword to be searched in the tasklist
-     * @return A formatted string output for the tasks; if no result, empty string
+     * @param taskName The keyword to search for in task names.
+     * @return A formatted string output for the tasks; if no result, empty string.
      */
     public String getFindTaskListing(String taskName) {
         StringBuilder sb = new StringBuilder();
@@ -122,6 +122,12 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Returns tasks that are scheduled on or within the target date.
+     *
+     * @param target The date to check against each task's schedule.
+     * @return A list of tasks that match the target date.
+     */
     public ArrayList<Task> getScheduleListing(LocalDate target) {
         StringBuilder sb = new StringBuilder();
         ArrayList<Task> scheduledTasks = new ArrayList<>();

@@ -15,11 +15,11 @@ public class EventTask extends Task {
     private LocalDateTime endTime;
 
     /**
-     * Constructor of EventTask
+     * Constructs an event task.
      *
-     * @param taskName name of the task
-     * @param from     The start date / time of the event
-     * @param to       The end date / time of the event
+     * @param taskName Name of the task.
+     * @param from     The start date/time of the event.
+     * @param to       The end date/time of the event.
      */
     public EventTask(String taskName, LocalDateTime from, LocalDateTime to) {
         super(taskName);
@@ -28,9 +28,9 @@ public class EventTask extends Task {
     }
 
     /**
-     * String representation of the Event Task
+     * Returns the string representation of the event task.
      *
-     * @return A string representation of Event Task
+     * @return A string representation of the event task.
      */
     @Override
     public String toString() {
@@ -39,9 +39,9 @@ public class EventTask extends Task {
     }
 
     /**
-     * Convert Event task into a single-line format for saving to disk
+     * Converts the event task into a single-line format for saving to disk.
      *
-     * @return A single-line string encoding this Event task
+     * @return A single-line string encoding this event task.
      */
     @Override
     public String toFileString() {
@@ -49,6 +49,12 @@ public class EventTask extends Task {
                 getTaskName(), Parser.dateToSave(this.startTime), Parser.dateToSave(this.endTime));
     }
 
+    /**
+     * Returns true when the query date falls within the event's start and end dates.
+     *
+     * @param queryDate The date to check against.
+     * @return {@code true} if the query date is within the event date range, else {@code false}.
+     */
     @Override
     public boolean insideSchedule(LocalDate queryDate) {
         return !queryDate.isBefore(this.startTime.toLocalDate()) && !queryDate.isAfter(this.endTime.toLocalDate());

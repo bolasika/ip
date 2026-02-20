@@ -11,7 +11,7 @@ import guma.task.TaskList;
  */
 public class CompleteCommand extends Command {
     /** Index of the task to be marked complete in the tasks */
-    private int taskIndex;
+    private final int taskIndex;
 
     /**
      * Initializes the command with the index of the task to be marked.

@@ -22,6 +22,13 @@ public class ScheduleCommand extends Command {
         this.targetDate = targetDate;
     }
 
+    /**
+     * Executes the schedule listing for the target date.
+     *
+     * @param tasks   The task list to be queried.
+     * @param ui      The user interface to show the schedule listing.
+     * @param storage The storage (unused in this command).
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.getScheduleListing(tasks, this.targetDate);

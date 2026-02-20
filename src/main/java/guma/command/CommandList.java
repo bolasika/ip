@@ -20,11 +20,22 @@ public enum CommandList {
     private final String syntax;
     private final String description;
 
+    /**
+     * Creates a command entry with syntax and description.
+     *
+     * @param syntax      The command syntax to display.
+     * @param description The human-readable description.
+     */
     CommandList(String syntax, String description) {
         this.syntax = syntax;
         this.description = description;
     }
 
+    /**
+     * Returns a formatted help line for this command.
+     *
+     * @return A formatted string for help output.
+     */
     @Override
     public String toString() {
         return String.format("`%s`: %s\n", this.syntax, this.description);

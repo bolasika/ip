@@ -9,8 +9,13 @@ import guma.task.TaskList;
  * Command to find all tasks that contains the user input
  */
 public class FindCommand extends Command {
-    private String taskName;
+    private final String taskName;
 
+    /**
+     * Initializes the command with the name fragment to match.
+     *
+     * @param taskName The task name (or fragment) to search for.
+     */
     public FindCommand(String taskName) {
         this.taskName = taskName;
     }
