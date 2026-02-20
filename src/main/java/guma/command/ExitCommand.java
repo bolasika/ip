@@ -18,17 +18,17 @@ public class ExitCommand extends Command {
      * @throws GumaException If there is an error saving tasks.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             tasks.saveTo(storage);
             return ui.getFarewell();
-        } catch (Exception e) {
+        } catch (GumaException e) {
             throw new GumaException(">> Weird sia, cannot save your tasks.\nYou sure you type correctly ah?");
         }
     }
 
     /**
-     * Returns true to indicate that the application should exit.
+     * Returns true to indicate that the application should exit. (for CLI mode)
      *
      * @return true.
      */

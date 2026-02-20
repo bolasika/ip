@@ -31,10 +31,13 @@ public class Storage {
             return getTasksFromLocal(f);
         } catch (FileNotFoundException e) {
             System.out.println("Unable in reading file");
-            return null;
+            return new ArrayList<Task>();
+        } catch (AssertionError e) {
+            System.out.println("Invalid file path");
+            return new ArrayList<Task>();
         } catch (IOException e) {
             System.out.println("Unable to read/create data file");
-            return null;
+            return new ArrayList<Task>();
         }
     }
 
@@ -45,7 +48,7 @@ public class Storage {
      * @return An {@link ArrayList} of tasks, empty if the file did not previously exist.
      * @throws IOException If the file cannot be created or read.
      */
-    private static ArrayList<Task> getTasksFromLocal(File f) throws IOException {
+    private static ArrayList<Task> getTasksFromLocal(File f) throws IOException, AssertionError {
         assert f != null : "File object should not be null";
         if (!f.exists()) {
             createParentFiles(f);

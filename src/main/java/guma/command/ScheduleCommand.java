@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import guma.Storage;
 import guma.Ui;
-import guma.exception.GumaException;
 import guma.task.TaskList;
 
 /**
@@ -24,13 +23,7 @@ public class ScheduleCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
-        try {
-            return ui.getScheduleListing(tasks, this.targetDate);
-        } catch (Exception e) {
-            throw new GumaException(">> Weird sia, cannot show schedule listing.\n"
-                    +
-                    "You sure you type correctly ah?\nLike dis: schedule /on dd/MM/yyyy");
-        }
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getScheduleListing(tasks, this.targetDate);
     }
 }

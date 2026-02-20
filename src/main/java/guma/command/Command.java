@@ -8,11 +8,8 @@ import guma.task.TaskList;
  * Represents an executable command.
  */
 public abstract class Command {
-    /** Indicates whether this command should terminate the application. */
-    private boolean isExit = false;
-
     /**
-     * Checks if the application should exit after this command.
+     * Checks if the application should exit after this command. (for CLI mode)
      *
      * @return true if the application should exit, false otherwise.
      */

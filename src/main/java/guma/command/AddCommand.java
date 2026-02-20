@@ -23,7 +23,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             return ui.getAdd(tasks.addTask(this.task), tasks.getSize());
         } catch (Exception e) {

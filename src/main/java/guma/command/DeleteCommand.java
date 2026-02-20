@@ -31,17 +31,13 @@ public class DeleteCommand extends Command {
      * @throws GumaException If the task index is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             assert (this.taskIndex <= tasks.getSize() && this.taskIndex > 0)
                     : "Select item should be within the task list";
             return ui.getDeletion(tasks.deleteTask(this.taskIndex), tasks.getSize());
         } catch (AssertionError | IndexOutOfBoundsException e) {
             throw GumaInvalidIndex.invalidIndex();
-        } catch (Exception e) {
-            throw new GumaException(">> Weird sia, cannot delete this task.\n"
-                    +
-                    "You sure you type correctly ah?\nLike dis: delete <index>");
         }
     }
 }

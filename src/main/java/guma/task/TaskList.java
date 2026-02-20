@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import guma.Storage;
+import guma.exception.GumaException;
+
 /**
  * Manages a list of tasks.
  * Provides methods to add, delete, complete, and undo tasks.
@@ -97,6 +99,9 @@ public class TaskList {
      * @return true if save was successful, false otherwise.
      */
     public boolean saveTo(Storage storage) {
+        if (!storage.saveTask(this.tasks)) {
+            throw new GumaException("Cannot save task");
+        }
         return storage.saveTask(this.tasks);
     }
 

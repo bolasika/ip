@@ -18,13 +18,7 @@ public class ListCommand extends Command {
      * @throws GumaException If there is an error listing tasks.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws GumaException {
-        try {
-            return ui.getListing(tasks);
-        } catch (Exception e) {
-            throw new GumaException(">> Weird sia, cannot list tasks.\n"
-                    +
-                    "You sure you type correctly ah?");
-        }
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getListing(tasks);
     }
 }
