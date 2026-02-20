@@ -1,4 +1,4 @@
-package guma;
+package guma.gui;
 
 import java.io.IOException;
 import java.util.Collections;

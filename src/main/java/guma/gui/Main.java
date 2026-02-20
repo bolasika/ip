@@ -1,7 +1,8 @@
-package guma;
+package guma.gui;
 
 import java.io.IOException;
 
+import guma.Guma;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
